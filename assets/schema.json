@@ -1,0 +1,3151 @@
+{
+ "domains": [
+  {
+   "key": "dom1",
+   "label": "Facility Readiness & Governance",
+   "weight": 10,
+   "items": [
+    {
+     "name": "q001",
+     "label": "Facility is open and providing scheduled PHC services at time of visit.",
+     "evidence": "Direct observation; duty roster",
+     "critical": true
+    },
+    {
+     "name": "q002",
+     "label": "Current staff list and duty roster are available and match staff on ground.",
+     "evidence": "Staff list; duty roster; interview",
+     "critical": false
+    },
+    {
+     "name": "q003",
+     "label": "At least one staff competent to provide RI is available or scheduled.",
+     "evidence": "Roster; training record; demonstration",
+     "critical": false
+    },
+    {
+     "name": "q004",
+     "label": "At least one staff competent in nutrition screening/IYCF is available or scheduled.",
+     "evidence": "Roster; training record; demonstration",
+     "critical": false
+    },
+    {
+     "name": "q005",
+     "label": "Skilled maternal/newborn care provider is available where delivery services are offered.",
+     "evidence": "Roster; credentials",
+     "critical": true
+    },
+    {
+     "name": "q006",
+     "label": "Facility has updated catchment population, settlements and target populations.",
+     "evidence": "Microplan/catchment map",
+     "critical": false
+    },
+    {
+     "name": "q007",
+     "label": "Hard-to-reach, insecure and underserved settlements are identified with service plans.",
+     "evidence": "Map/microplan/outreach plan",
+     "critical": false
+    },
+    {
+     "name": "q008",
+     "label": "Functional water source and handwashing point with soap/hand rub are available.",
+     "evidence": "Direct observation",
+     "critical": true
+    },
+    {
+     "name": "q009",
+     "label": "Essential service areas provide adequate privacy and are reasonably clean.",
+     "evidence": "Direct observation",
+     "critical": false
+    },
+    {
+     "name": "q010",
+     "label": "Reliable electricity/alternative power is available for essential services and night delivery where applicable.",
+     "evidence": "Direct observation",
+     "critical": false
+    },
+    {
+     "name": "q011",
+     "label": "Evidence of recent facility data/performance review meeting is available.",
+     "evidence": "Minutes/action points",
+     "critical": false
+    },
+    {
+     "name": "q012",
+     "label": "Previous supportive supervision report is available and prior action points have been reviewed.",
+     "evidence": "Previous report/action tracker",
+     "critical": false
+    },
+    {
+     "name": "q013",
+     "label": "Functional linkage exists with WDC/CHIPS/community structures for demand generation and referral.",
+     "evidence": "Minutes/referral records/interview",
+     "critical": false
+    },
+    {
+     "name": "q014",
+     "label": "Referral facility, contact details and emergency transport arrangement are documented.",
+     "evidence": "Referral directory/phone numbers",
+     "critical": true
+    }
+   ]
+  },
+  {
+   "key": "dom2",
+   "label": "Routine Immunization",
+   "weight": 25,
+   "items": [
+    {
+     "name": "q015",
+     "label": "Updated RI microplan reflects all settlements and current target populations.",
+     "evidence": "RI microplan",
+     "critical": false
+    },
+    {
+     "name": "q016",
+     "label": "Fixed and outreach RI session schedules are current, displayed and communicated to communities.",
+     "evidence": "Session plan/display",
+     "critical": false
+    },
+    {
+     "name": "q017",
+     "label": "Planned fixed RI sessions were conducted in the last month.",
+     "evidence": "Session records/tally",
+     "critical": false
+    },
+    {
+     "name": "q018",
+     "label": "Planned outreach sessions were conducted; cancelled sessions have documented catch-up plans.",
+     "evidence": "Outreach plan/session records",
+     "critical": false
+    },
+    {
+     "name": "q019",
+     "label": "Due/defaulter lists are generated and used for follow-up.",
+     "evidence": "Due list/register/community follow-up",
+     "critical": false
+    },
+    {
+     "name": "q020",
+     "label": "Zero-dose and missed children are identified by settlement/community and linked to action.",
+     "evidence": "Register/line list/microplan",
+     "critical": false
+    },
+    {
+     "name": "q021",
+     "label": "Functional cold-chain equipment is available and current temperature is within recommended range.",
+     "evidence": "Direct observation/temp display",
+     "critical": true
+    },
+    {
+     "name": "q022",
+     "label": "Temperature records are complete and recent excursions were appropriately documented/managed.",
+     "evidence": "Temperature chart/log",
+     "critical": true
+    },
+    {
+     "name": "q023",
+     "label": "Vaccines are correctly stored/arranged; no expired or unusable vaccines are present.",
+     "evidence": "Direct observation",
+     "critical": true
+    },
+    {
+     "name": "q024",
+     "label": "VVM and open-vial policy are correctly understood and applied.",
+     "evidence": "Observation/interview",
+     "critical": true
+    },
+    {
+     "name": "q025",
+     "label": "Vaccine stock cards are current and physical balances agree with records.",
+     "evidence": "Stock card/physical count",
+     "critical": false
+    },
+    {
+     "name": "q026",
+     "label": "No unexplained stock-out of priority vaccines occurred during the review period.",
+     "evidence": "Stock card/bin card",
+     "critical": false
+    },
+    {
+     "name": "q027",
+     "label": "AD syringes, reconstitution syringes, safety boxes and vaccine carriers are adequate.",
+     "evidence": "Physical count",
+     "critical": false
+    },
+    {
+     "name": "q028",
+     "label": "Vaccination history is reviewed and every vaccine due is offered during contact.",
+     "evidence": "Direct observation/card review",
+     "critical": false
+    },
+    {
+     "name": "q029",
+     "label": "Correct vaccine, dose, route and site are used.",
+     "evidence": "Direct observation",
+     "critical": true
+    },
+    {
+     "name": "q030",
+     "label": "Used syringes are immediately discarded without recapping into safety boxes.",
+     "evidence": "Direct observation",
+     "critical": true
+    },
+    {
+     "name": "q031",
+     "label": "Caregiver is told vaccines given, next visit date and what to do for common AEFI.",
+     "evidence": "Direct observation/interview",
+     "critical": false
+    },
+    {
+     "name": "q032",
+     "label": "Vaccinations are recorded immediately in register/card/tally as applicable.",
+     "evidence": "Observation/register",
+     "critical": false
+    },
+    {
+     "name": "q033",
+     "label": "Staff know how to identify, report and initially manage AEFI; reporting contacts/forms are available.",
+     "evidence": "Interview/forms/emergency tray",
+     "critical": true
+    },
+    {
+     "name": "q034",
+     "label": "Coverage and dropout monitoring charts are current and discussed by staff.",
+     "evidence": "Monitoring chart/minutes",
+     "critical": false
+    },
+    {
+     "name": "q035",
+     "label": "Penta1, Penta3, MCV1 and FIC performance for last 3 months is reviewed against target.",
+     "evidence": "Register/monthly summary/DHIS2",
+     "critical": false
+    },
+    {
+     "name": "q036",
+     "label": "Penta1\u2013Penta3 dropout is calculated and corrective action exists if high.",
+     "evidence": "Monitoring chart/action plan",
+     "critical": false
+    },
+    {
+     "name": "q037",
+     "label": "Children attending other services have immunization status checked and missed vaccines offered/referred.",
+     "evidence": "Observation/register",
+     "critical": false
+    },
+    {
+     "name": "q038",
+     "label": "Vaccine utilization/wastage is monitored and unusually high wastage is investigated.",
+     "evidence": "Stock/usage report",
+     "critical": false
+    }
+   ]
+  },
+  {
+   "key": "dom3",
+   "label": "Nutrition",
+   "weight": 20,
+   "items": [
+    {
+     "name": "q039",
+     "label": "Routine nutrition screening is offered to eligible children during relevant facility contacts.",
+     "evidence": "Observation/register",
+     "critical": false
+    },
+    {
+     "name": "q040",
+     "label": "Functional weighing scale(s), MUAC tapes and length/height equipment are available as appropriate.",
+     "evidence": "Physical verification",
+     "critical": false
+    },
+    {
+     "name": "q041",
+     "label": "Staff correctly measure and interpret MUAC.",
+     "evidence": "Direct demonstration",
+     "critical": false
+    },
+    {
+     "name": "q042",
+     "label": "Staff correctly assess bilateral pitting oedema.",
+     "evidence": "Direct demonstration",
+     "critical": false
+    },
+    {
+     "name": "q043",
+     "label": "Growth monitoring records are complete and abnormal growth triggers counselling/action.",
+     "evidence": "Growth chart/register",
+     "critical": false
+    },
+    {
+     "name": "q044",
+     "label": "SAM/MAM are correctly classified using current protocol.",
+     "evidence": "Case review/demonstration",
+     "critical": false
+    },
+    {
+     "name": "q045",
+     "label": "SAM with medical complications is recognized, stabilized as appropriate and urgently referred.",
+     "evidence": "Case review/referral record",
+     "critical": true
+    },
+    {
+     "name": "q046",
+     "label": "Uncomplicated acute malnutrition is managed/referred according to facility designation.",
+     "evidence": "Register/case review",
+     "critical": false
+    },
+    {
+     "name": "q047",
+     "label": "Children enrolled for nutrition care are followed up; defaulters are identified and traced.",
+     "evidence": "Register/defaulter list",
+     "critical": false
+    },
+    {
+     "name": "q048",
+     "label": "Counselling covers early initiation and exclusive breastfeeding for first 6 months.",
+     "evidence": "Observation/job aids",
+     "critical": false
+    },
+    {
+     "name": "q049",
+     "label": "Counselling covers timely complementary feeding, meal frequency, diversity and responsive feeding.",
+     "evidence": "Observation/job aids",
+     "critical": false
+    },
+    {
+     "name": "q050",
+     "label": "Caregivers receive practical, individualized counselling rather than only generic health talks.",
+     "evidence": "Observation/interview",
+     "critical": false
+    },
+    {
+     "name": "q051",
+     "label": "Pregnant/lactating women receive nutrition assessment and dietary counselling.",
+     "evidence": "ANC/PNC record",
+     "critical": false
+    },
+    {
+     "name": "q052",
+     "label": "Iron/folate supplementation and adherence counselling are provided according to protocol.",
+     "evidence": "ANC register/stock",
+     "critical": false
+    },
+    {
+     "name": "q053",
+     "label": "Vitamin A supplementation is available/provided to eligible children according to policy.",
+     "evidence": "Register/stock",
+     "critical": false
+    },
+    {
+     "name": "q054",
+     "label": "Deworming is provided to eligible children according to policy.",
+     "evidence": "Register/stock",
+     "critical": false
+    },
+    {
+     "name": "q055",
+     "label": "Nutrition commodities have current stock records and no unexplained prolonged stock-outs.",
+     "evidence": "Stock cards",
+     "critical": false
+    },
+    {
+     "name": "q056",
+     "label": "RUTF/CMAM commodities are available and properly managed where the facility is designated for such services.",
+     "evidence": "Stock/register",
+     "critical": true
+    },
+    {
+     "name": "q057",
+     "label": "Eligible children presenting for RI/OPD/other services are screened for nutrition risks.",
+     "evidence": "Observation/register",
+     "critical": false
+    },
+    {
+     "name": "q058",
+     "label": "Nutrition screening, SAM/MAM, treatment outcomes and commodity data are reviewed monthly.",
+     "evidence": "Monthly summary/minutes",
+     "critical": false
+    }
+   ]
+  },
+  {
+   "key": "dom4",
+   "label": "Maternal & Newborn Health",
+   "weight": 25,
+   "items": [
+    {
+     "name": "q059",
+     "label": "Pregnant women are encouraged and supported to register for ANC early, preferably in first trimester.",
+     "evidence": "ANC register/community plan",
+     "critical": false
+    },
+    {
+     "name": "q060",
+     "label": "ANC contacts and follow-up appointments are recorded and missed appointments followed up where feasible.",
+     "evidence": "ANC register/defaulter list",
+     "critical": false
+    },
+    {
+     "name": "q061",
+     "label": "Blood pressure, weight and appropriate clinical examination are performed and documented.",
+     "evidence": "Observation/ANC card",
+     "critical": false
+    },
+    {
+     "name": "q062",
+     "label": "Routine laboratory screening/testing is provided or linked according to national protocol.",
+     "evidence": "ANC record/lab/referral",
+     "critical": false
+    },
+    {
+     "name": "q063",
+     "label": "IPTp, tetanus-containing vaccination and iron/folate are provided as indicated.",
+     "evidence": "ANC register/stock",
+     "critical": false
+    },
+    {
+     "name": "q064",
+     "label": "Birth preparedness, complication readiness and maternal danger signs are discussed and documented.",
+     "evidence": "ANC card/observation",
+     "critical": false
+    },
+    {
+     "name": "q065",
+     "label": "High-risk pregnancies are identified, documented and appropriately referred/followed up.",
+     "evidence": "ANC/referral register",
+     "critical": true
+    },
+    {
+     "name": "q066",
+     "label": "Privacy, dignity, informed communication and confidentiality are maintained during maternal care.",
+     "evidence": "Observation/client interview",
+     "critical": true
+    },
+    {
+     "name": "q067",
+     "label": "Delivery room is clean, private, functional and ready where delivery services are offered.",
+     "evidence": "Direct observation",
+     "critical": false
+    },
+    {
+     "name": "q068",
+     "label": "Skilled provider coverage is available during expected delivery service hours.",
+     "evidence": "Roster",
+     "critical": true
+    },
+    {
+     "name": "q069",
+     "label": "A uterotonic for prevention/treatment of PPH is available, in-date and appropriately stored.",
+     "evidence": "Physical verification",
+     "critical": true
+    },
+    {
+     "name": "q070",
+     "label": "Magnesium sulphate and other required emergency obstetric medicines are available at designated facilities.",
+     "evidence": "Physical verification",
+     "critical": true
+    },
+    {
+     "name": "q071",
+     "label": "IV fluids, cannulae, PPE and essential emergency supplies are available.",
+     "evidence": "Physical verification",
+     "critical": true
+    },
+    {
+     "name": "q072",
+     "label": "Labour is monitored with the nationally recommended Labour Care Guide/partograph as applicable.",
+     "evidence": "Recent case records",
+     "critical": false
+    },
+    {
+     "name": "q073",
+     "label": "Maternal vital signs, fetal condition and labour progress are appropriately documented.",
+     "evidence": "Delivery record",
+     "critical": false
+    },
+    {
+     "name": "q074",
+     "label": "Active management of third stage/appropriate uterotonic administration is documented.",
+     "evidence": "Delivery record",
+     "critical": false
+    },
+    {
+     "name": "q075",
+     "label": "Staff can recognize and initiate appropriate response for PPH, eclampsia, sepsis and obstructed labour.",
+     "evidence": "Case scenario/interview",
+     "critical": true
+    },
+    {
+     "name": "q076",
+     "label": "Maternal emergencies are stabilized as appropriate and referred without avoidable delay.",
+     "evidence": "Referral/case review",
+     "critical": true
+    },
+    {
+     "name": "q077",
+     "label": "Immediate drying/thermal care, skin-to-skin and early breastfeeding are routinely supported.",
+     "evidence": "Observation/delivery record",
+     "critical": false
+    },
+    {
+     "name": "q078",
+     "label": "Functional newborn bag and appropriately sized masks are immediately available in delivery area.",
+     "evidence": "Physical verification",
+     "critical": true
+    },
+    {
+     "name": "q079",
+     "label": "Relevant staff can demonstrate basic newborn resuscitation steps.",
+     "evidence": "Demonstration",
+     "critical": true
+    },
+    {
+     "name": "q080",
+     "label": "Birth weight, breathing, danger signs and other immediate newborn assessments are documented.",
+     "evidence": "Delivery/newborn record",
+     "critical": false
+    },
+    {
+     "name": "q081",
+     "label": "Low-birth-weight/preterm babies receive KMC or timely referral as appropriate.",
+     "evidence": "Case review",
+     "critical": false
+    },
+    {
+     "name": "q082",
+     "label": "Mother and newborn are assessed before discharge and receive early postnatal follow-up.",
+     "evidence": "PNC/delivery record",
+     "critical": false
+    },
+    {
+     "name": "q083",
+     "label": "Maternal/newborn danger signs, breastfeeding and return instructions are explained.",
+     "evidence": "Client interview/PNC card",
+     "critical": false
+    },
+    {
+     "name": "q084",
+     "label": "Postpartum family-planning counselling is offered and voluntary choice supported.",
+     "evidence": "PNC/FP record",
+     "critical": false
+    },
+    {
+     "name": "q085",
+     "label": "Maternal, stillbirth and neonatal deaths are promptly reported and reviewed according to policy.",
+     "evidence": "Death records/review minutes",
+     "critical": true
+    },
+    {
+     "name": "q086",
+     "label": "ANC, facility delivery, PNC and maternal/newborn outcome trends are reviewed monthly.",
+     "evidence": "Monthly summary/minutes",
+     "critical": false
+    }
+   ]
+  },
+  {
+   "key": "dom5",
+   "label": "Child Health & Service Integration",
+   "weight": 10,
+   "items": [
+    {
+     "name": "q087",
+     "label": "Children are assessed for general danger signs and major childhood illnesses using current protocol.",
+     "evidence": "Observation/case review",
+     "critical": true
+    },
+    {
+     "name": "q088",
+     "label": "Respiratory rate/dehydration/fever and other relevant assessments are performed correctly.",
+     "evidence": "Demonstration/case review",
+     "critical": false
+    },
+    {
+     "name": "q089",
+     "label": "ORS and zinc are provided for eligible diarrhoea cases according to protocol.",
+     "evidence": "Case review/stock",
+     "critical": false
+    },
+    {
+     "name": "q090",
+     "label": "Malaria testing and treatment follow current national protocol.",
+     "evidence": "Case review/RDT/stock",
+     "critical": false
+    },
+    {
+     "name": "q091",
+     "label": "Antibiotics are prescribed only when indicated and correct dose/duration is explained.",
+     "evidence": "Case review",
+     "critical": false
+    },
+    {
+     "name": "q092",
+     "label": "Seriously ill children are recognized, given pre-referral care as appropriate and urgently referred.",
+     "evidence": "Case review/referral register",
+     "critical": true
+    },
+    {
+     "name": "q093",
+     "label": "Every eligible child contact includes an immunization status check.",
+     "evidence": "Observation/card review",
+     "critical": false
+    },
+    {
+     "name": "q094",
+     "label": "Every relevant child contact includes nutrition/growth assessment or screening.",
+     "evidence": "Observation/register",
+     "critical": false
+    },
+    {
+     "name": "q095",
+     "label": "ANC/PNC contacts include nutrition, immunization/prevention and FP linkages as appropriate.",
+     "evidence": "Observation/records",
+     "critical": false
+    },
+    {
+     "name": "q096",
+     "label": "Clients are not unnecessarily asked to return another day for an available indicated service.",
+     "evidence": "Observation/client interview",
+     "critical": false
+    },
+    {
+     "name": "q097",
+     "label": "Community/CHIPS referrals are documented and feedback provided where feasible.",
+     "evidence": "Referral register",
+     "critical": false
+    },
+    {
+     "name": "q098",
+     "label": "Missed child health appointments are identified and followed up where feasible.",
+     "evidence": "Defaulter list",
+     "critical": false
+    },
+    {
+     "name": "q099",
+     "label": "Caregivers understand diagnosis/treatment, danger signs and when to return.",
+     "evidence": "Client exit interview",
+     "critical": false
+    },
+    {
+     "name": "q100",
+     "label": "Under-five attendance, key conditions, referrals and deaths are reviewed for trends/actions.",
+     "evidence": "Monthly summary/minutes",
+     "critical": false
+    }
+   ]
+  },
+  {
+   "key": "dom6",
+   "label": "Data Quality, IPC & Referral",
+   "weight": 10,
+   "items": [
+    {
+     "name": "q101",
+     "label": "Required RI, ANC, delivery, PNC, child health, nutrition and referral registers are available/current.",
+     "evidence": "Register review",
+     "critical": false
+    },
+    {
+     "name": "q102",
+     "label": "Registers are legible, substantially complete and free of obvious duplicate/unexplained entries.",
+     "evidence": "Register review",
+     "critical": false
+    },
+    {
+     "name": "q103",
+     "label": "Selected tracer indicator totals agree between register/tally/monthly summary.",
+     "evidence": "Recount/source verification",
+     "critical": false
+    },
+    {
+     "name": "q104",
+     "label": "Selected monthly summary values agree with values reported to DHIS2/state reporting system.",
+     "evidence": "Source vs reported data",
+     "critical": false
+    },
+    {
+     "name": "q105",
+     "label": "Routine reports were submitted within the required reporting timeline.",
+     "evidence": "Submission evidence",
+     "critical": false
+    },
+    {
+     "name": "q106",
+     "label": "Facility staff use trend data to identify gaps, communities and corrective actions.",
+     "evidence": "Monitoring chart/minutes",
+     "critical": false
+    },
+    {
+     "name": "q107",
+     "label": "Tracer commodity stock cards are current and physical balances reasonably reconcile.",
+     "evidence": "Stock card/physical count",
+     "critical": false
+    },
+    {
+     "name": "q108",
+     "label": "Expired commodities are segregated and FEFO/storage standards are observed.",
+     "evidence": "Direct observation",
+     "critical": false
+    },
+    {
+     "name": "q109",
+     "label": "Handwashing/hand-rub is available at point of care and appropriate hand hygiene is observed.",
+     "evidence": "Direct observation",
+     "critical": true
+    },
+    {
+     "name": "q110",
+     "label": "Unsafe injection practices, needle recapping or inappropriate sharps disposal are not observed.",
+     "evidence": "Direct observation",
+     "critical": true
+    },
+    {
+     "name": "q111",
+     "label": "Waste is segregated and sharps/clinical waste are stored/disposed safely.",
+     "evidence": "Direct observation",
+     "critical": true
+    },
+    {
+     "name": "q112",
+     "label": "Reusable instruments/equipment are appropriately cleaned, disinfected/sterilized as required.",
+     "evidence": "Observation/process review",
+     "critical": true
+    },
+    {
+     "name": "q113",
+     "label": "Appropriate PPE is available and used for relevant procedures.",
+     "evidence": "Physical verification/observation",
+     "critical": false
+    },
+    {
+     "name": "q114",
+     "label": "Referral forms/register capture reason, stabilization, destination and outcome/feedback where available.",
+     "evidence": "Referral records",
+     "critical": false
+    },
+    {
+     "name": "q115",
+     "label": "Functional communication with referral facility is available.",
+     "evidence": "Phone test/contact list",
+     "critical": true
+    },
+    {
+     "name": "q116",
+     "label": "Emergency transport or documented alternative referral arrangement is functional.",
+     "evidence": "Verification/interview",
+     "critical": true
+    },
+    {
+     "name": "q117",
+     "label": "Serious patient-safety incidents/complaints are documented, reviewed and acted upon.",
+     "evidence": "Incident/complaint log",
+     "critical": true
+    },
+    {
+     "name": "q118",
+     "label": "No evidence of unofficial charging for services/commodities designated free under applicable programme policy.",
+     "evidence": "Client interview/notice",
+     "critical": true
+    },
+    {
+     "name": "q119",
+     "label": "Previous supervision action points are tracked with evidence of closure or escalation.",
+     "evidence": "Action tracker",
+     "critical": false
+    },
+    {
+     "name": "q120",
+     "label": "Supervisor provides and documents practical coaching for gaps identified during the visit.",
+     "evidence": "Mentoring record",
+     "critical": false
+    }
+   ]
+  }
+ ],
+ "weights": {
+  "dom1": 10,
+  "dom2": 25,
+  "dom3": 20,
+  "dom4": 25,
+  "dom5": 10,
+  "dom6": 10
+ },
+ "tracers": [
+  {
+   "field": "ri_session_completion",
+   "label": "Planned RI sessions conducted",
+   "unit": "%",
+   "direction": "higher",
+   "domain": "dom2"
+  },
+  {
+   "field": "penta1",
+   "label": "Penta1 coverage",
+   "unit": "%",
+   "direction": "higher",
+   "domain": "dom2"
+  },
+  {
+   "field": "penta3",
+   "label": "Penta3 coverage",
+   "unit": "%",
+   "direction": "higher",
+   "domain": "dom2"
+  },
+  {
+   "field": "mcv1",
+   "label": "MCV1 coverage",
+   "unit": "%",
+   "direction": "higher",
+   "domain": "dom2"
+  },
+  {
+   "field": "fic",
+   "label": "Fully immunized child (FIC) coverage",
+   "unit": "%",
+   "direction": "higher",
+   "domain": "dom2"
+  },
+  {
+   "field": "penta_dropout",
+   "label": "Penta1\u2013Penta3 dropout",
+   "unit": "%",
+   "direction": "lower",
+   "domain": "dom2"
+  },
+  {
+   "field": "nutrition_screening",
+   "label": "Eligible U5 nutrition screening coverage",
+   "unit": "%",
+   "direction": "higher",
+   "domain": "dom3"
+  },
+  {
+   "field": "sam_cure",
+   "label": "SAM cure rate",
+   "unit": "%",
+   "direction": "higher",
+   "domain": "dom3"
+  },
+  {
+   "field": "sam_default",
+   "label": "SAM default rate",
+   "unit": "%",
+   "direction": "lower",
+   "domain": "dom3"
+  },
+  {
+   "field": "early_anc",
+   "label": "ANC first contact in first trimester",
+   "unit": "%",
+   "direction": "higher",
+   "domain": "dom4"
+  },
+  {
+   "field": "anc4",
+   "label": "ANC4+ coverage",
+   "unit": "%",
+   "direction": "higher",
+   "domain": "dom4"
+  },
+  {
+   "field": "anc8",
+   "label": "ANC8+ contacts",
+   "unit": "%",
+   "direction": "higher",
+   "domain": "dom4"
+  },
+  {
+   "field": "facility_delivery",
+   "label": "Facility delivery / skilled birth attendance",
+   "unit": "%",
+   "direction": "higher",
+   "domain": "dom4"
+  },
+  {
+   "field": "pnc48",
+   "label": "PNC within 48 hours",
+   "unit": "%",
+   "direction": "higher",
+   "domain": "dom4"
+  },
+  {
+   "field": "maternal_deaths",
+   "label": "Maternal deaths",
+   "unit": "count",
+   "direction": "lower",
+   "domain": "dom4"
+  },
+  {
+   "field": "neonatal_deaths",
+   "label": "Early neonatal deaths",
+   "unit": "count",
+   "direction": "lower",
+   "domain": "dom4"
+  },
+  {
+   "field": "report_completeness",
+   "label": "Routine report completeness",
+   "unit": "%",
+   "direction": "higher",
+   "domain": "dom6"
+  },
+  {
+   "field": "report_timeliness",
+   "label": "Routine report timeliness",
+   "unit": "%",
+   "direction": "higher",
+   "domain": "dom6"
+  }
+ ],
+ "lga": [
+  {
+   "code": "asa",
+   "label": "Asa"
+  },
+  {
+   "code": "baruten",
+   "label": "Baruten"
+  },
+  {
+   "code": "edu",
+   "label": "Edu"
+  },
+  {
+   "code": "ekiti",
+   "label": "Ekiti"
+  },
+  {
+   "code": "ifelodun",
+   "label": "Ifelodun"
+  },
+  {
+   "code": "ilorin_east",
+   "label": "Ilorin East"
+  },
+  {
+   "code": "ilorin_south",
+   "label": "Ilorin South"
+  },
+  {
+   "code": "ilorin_west",
+   "label": "Ilorin West"
+  },
+  {
+   "code": "irepodun",
+   "label": "Irepodun"
+  },
+  {
+   "code": "isin",
+   "label": "Isin"
+  },
+  {
+   "code": "kaiama",
+   "label": "Kaiama"
+  },
+  {
+   "code": "moro",
+   "label": "Moro"
+  },
+  {
+   "code": "offa",
+   "label": "Offa"
+  },
+  {
+   "code": "oke_ero",
+   "label": "Oke Ero"
+  },
+  {
+   "code": "oyun",
+   "label": "Oyun"
+  },
+  {
+   "code": "patigi",
+   "label": "Patigi"
+  }
+ ],
+ "ward": [
+  {
+   "code": "asa_aboto_odoode",
+   "label": "Aboto/Odoode",
+   "lga": "asa"
+  },
+  {
+   "code": "asa_afon",
+   "label": "Afon",
+   "lga": "asa"
+  },
+  {
+   "code": "asa_agbona_fata",
+   "label": "Agbona/Fata",
+   "lga": "asa"
+  },
+  {
+   "code": "asa_awe_orimaro",
+   "label": "Awe/Orimaro",
+   "lga": "asa"
+  },
+  {
+   "code": "asa_budo_egba",
+   "label": "Budo-Egba",
+   "lga": "asa"
+  },
+  {
+   "code": "asa_efue_berikodo",
+   "label": "Efue/Berikodo",
+   "lga": "asa"
+  },
+  {
+   "code": "asa_gambar_ayekale",
+   "label": "Gambar/Ayekale",
+   "lga": "asa"
+  },
+  {
+   "code": "asa_ila_oja",
+   "label": "Ila- Oja",
+   "lga": "asa"
+  },
+  {
+   "code": "asa_laduba",
+   "label": "Laduba",
+   "lga": "asa"
+  },
+  {
+   "code": "asa_ogbondoroko",
+   "label": "Ogbondoroko",
+   "lga": "asa"
+  },
+  {
+   "code": "asa_ogele",
+   "label": "Ogele",
+   "lga": "asa"
+  },
+  {
+   "code": "asa_okeso",
+   "label": "Okeso",
+   "lga": "asa"
+  },
+  {
+   "code": "asa_okeweru_yow_ii",
+   "label": "Okeweru/Yow II",
+   "lga": "asa"
+  },
+  {
+   "code": "asa_onire_odegiwa",
+   "label": "Onire/Odegiwa",
+   "lga": "asa"
+  },
+  {
+   "code": "asa_otte_ballah",
+   "label": "Otte/Ballah",
+   "lga": "asa"
+  },
+  {
+   "code": "asa_owode_gbogun",
+   "label": "Owode/Gbogun",
+   "lga": "asa"
+  },
+  {
+   "code": "asa_sosoki_yowere",
+   "label": "Sosoki/Yowere",
+   "lga": "asa"
+  },
+  {
+   "code": "baruten_bode_babane",
+   "label": "Bode Babane",
+   "lga": "baruten"
+  },
+  {
+   "code": "baruten_boriya_shiya",
+   "label": "Boriya/Shiya",
+   "lga": "baruten"
+  },
+  {
+   "code": "baruten_bwen_kiyoru",
+   "label": "Bwen/Kiyoru",
+   "lga": "baruten"
+  },
+  {
+   "code": "baruten_gwanara",
+   "label": "Gwanara",
+   "lga": "baruten"
+  },
+  {
+   "code": "baruten_ilesha",
+   "label": "Ilesha",
+   "lga": "baruten"
+  },
+  {
+   "code": "baruten_kenu_tabera",
+   "label": "Kenu/Tabera",
+   "lga": "baruten"
+  },
+  {
+   "code": "baruten_kpura_yakiru",
+   "label": "Kpura/Yakiru",
+   "lga": "baruten"
+  },
+  {
+   "code": "baruten_okuta",
+   "label": "Okuta",
+   "lga": "baruten"
+  },
+  {
+   "code": "baruten_sinawu_tumbiya",
+   "label": "Sinawu/Tumbiya",
+   "lga": "baruten"
+  },
+  {
+   "code": "baruten_yashikira_i",
+   "label": "Yashikira I",
+   "lga": "baruten"
+  },
+  {
+   "code": "baruten_yashikira_ii",
+   "label": "Yashikira II",
+   "lga": "baruten"
+  },
+  {
+   "code": "edu_lafiagi_i",
+   "label": "Lafiagi I",
+   "lga": "edu"
+  },
+  {
+   "code": "edu_lafiagi_ii",
+   "label": "Lafiagi II",
+   "lga": "edu"
+  },
+  {
+   "code": "edu_lafiagi_iii",
+   "label": "Lafiagi III",
+   "lga": "edu"
+  },
+  {
+   "code": "edu_lafiagi_iv",
+   "label": "Lafiagi IV",
+   "lga": "edu"
+  },
+  {
+   "code": "edu_tsaragi_i",
+   "label": "Tsaragi I",
+   "lga": "edu"
+  },
+  {
+   "code": "edu_tsaragi_ii",
+   "label": "Tsaragi II",
+   "lga": "edu"
+  },
+  {
+   "code": "edu_tsaragi_iii",
+   "label": "Tsaragi III",
+   "lga": "edu"
+  },
+  {
+   "code": "edu_tsonga_i",
+   "label": "Tsonga I",
+   "lga": "edu"
+  },
+  {
+   "code": "edu_tsonga_ii",
+   "label": "Tsonga II",
+   "lga": "edu"
+  },
+  {
+   "code": "edu_tsonga_iii",
+   "label": "Tsonga III",
+   "lga": "edu"
+  },
+  {
+   "code": "ekiti_eruku",
+   "label": "Eruku",
+   "lga": "ekiti"
+  },
+  {
+   "code": "ekiti_isapa",
+   "label": "Isapa",
+   "lga": "ekiti"
+  },
+  {
+   "code": "ekiti_koro",
+   "label": "Koro",
+   "lga": "ekiti"
+  },
+  {
+   "code": "ekiti_obbo_aiyegunle_i",
+   "label": "Obbo-Aiyegunle I",
+   "lga": "ekiti"
+  },
+  {
+   "code": "ekiti_obbo_aiyegunle_ii",
+   "label": "Obbo-Aiyegunle II",
+   "lga": "ekiti"
+  },
+  {
+   "code": "ekiti_obbo_ile",
+   "label": "Obbo-Ile",
+   "lga": "ekiti"
+  },
+  {
+   "code": "ekiti_oke_opin_etan",
+   "label": "Oke-Opin/Etan",
+   "lga": "ekiti"
+  },
+  {
+   "code": "ekiti_opin",
+   "label": "Opin",
+   "lga": "ekiti"
+  },
+  {
+   "code": "ekiti_osi_i",
+   "label": "Osi I",
+   "lga": "ekiti"
+  },
+  {
+   "code": "ekiti_osi_ii",
+   "label": "Osi II",
+   "lga": "ekiti"
+  },
+  {
+   "code": "ifelodun_agwijin",
+   "label": "Agwijin",
+   "lga": "ifelodun"
+  },
+  {
+   "code": "ifelodun_idofian_i",
+   "label": "Idofian I",
+   "lga": "ifelodun"
+  },
+  {
+   "code": "ifelodun_idofian_ii",
+   "label": "Idofian II",
+   "lga": "ifelodun"
+  },
+  {
+   "code": "ifelodun_igbaja_i",
+   "label": "Igbaja I",
+   "lga": "ifelodun"
+  },
+  {
+   "code": "ifelodun_igbaja_ii",
+   "label": "Igbaja II",
+   "lga": "ifelodun"
+  },
+  {
+   "code": "ifelodun_igbaja_iii",
+   "label": "Igbaja III",
+   "lga": "ifelodun"
+  },
+  {
+   "code": "ifelodun_ile_ire",
+   "label": "Ile-Ire",
+   "lga": "ifelodun"
+  },
+  {
+   "code": "ifelodun_oke_ode_i",
+   "label": "Oke-Ode I",
+   "lga": "ifelodun"
+  },
+  {
+   "code": "ifelodun_oke_ode_ii",
+   "label": "Oke-Ode II",
+   "lga": "ifelodun"
+  },
+  {
+   "code": "ifelodun_oke_ode_iii",
+   "label": "Oke-Ode III",
+   "lga": "ifelodun"
+  },
+  {
+   "code": "ifelodun_omupo",
+   "label": "Omupo",
+   "lga": "ifelodun"
+  },
+  {
+   "code": "ifelodun_ora",
+   "label": "Ora",
+   "lga": "ifelodun"
+  },
+  {
+   "code": "ifelodun_oro_ago",
+   "label": "Oro-Ago",
+   "lga": "ifelodun"
+  },
+  {
+   "code": "ifelodun_share_i",
+   "label": "Share I",
+   "lga": "ifelodun"
+  },
+  {
+   "code": "ifelodun_share_ii",
+   "label": "Share II",
+   "lga": "ifelodun"
+  },
+  {
+   "code": "ifelodun_share_iii",
+   "label": "Share III",
+   "lga": "ifelodun"
+  },
+  {
+   "code": "ifelodun_share_iv",
+   "label": "Share IV",
+   "lga": "ifelodun"
+  },
+  {
+   "code": "ifelodun_share_v",
+   "label": "Share V",
+   "lga": "ifelodun"
+  },
+  {
+   "code": "ilorin_east_agbeyangi_gbadamu",
+   "label": "Agbeyangi/Gbadamu",
+   "lga": "ilorin_east"
+  },
+  {
+   "code": "ilorin_east_apado",
+   "label": "Apado",
+   "lga": "ilorin_east"
+  },
+  {
+   "code": "ilorin_east_are_i",
+   "label": "Are I",
+   "lga": "ilorin_east"
+  },
+  {
+   "code": "ilorin_east_are_ii",
+   "label": "Are II",
+   "lga": "ilorin_east"
+  },
+  {
+   "code": "ilorin_east_gambari_i",
+   "label": "Gambari I",
+   "lga": "ilorin_east"
+  },
+  {
+   "code": "ilorin_east_gambari_ii",
+   "label": "Gambari II",
+   "lga": "ilorin_east"
+  },
+  {
+   "code": "ilorin_east_ibagun",
+   "label": "Ibagun",
+   "lga": "ilorin_east"
+  },
+  {
+   "code": "ilorin_east_iponrin",
+   "label": "Iponrin",
+   "lga": "ilorin_east"
+  },
+  {
+   "code": "ilorin_east_marafa_pepele",
+   "label": "Marafa/Pepele",
+   "lga": "ilorin_east"
+  },
+  {
+   "code": "ilorin_east_maya_ileapa",
+   "label": "Maya/Ileapa",
+   "lga": "ilorin_east"
+  },
+  {
+   "code": "ilorin_east_oke_oyi_oke_ose_alalubosa",
+   "label": "Oke Oyi/Oke-Ose/Alalubosa",
+   "lga": "ilorin_east"
+  },
+  {
+   "code": "ilorin_east_zango_i",
+   "label": "Zango I",
+   "lga": "ilorin_east"
+  },
+  {
+   "code": "ilorin_south_akanbi_i",
+   "label": "Akanbi I",
+   "lga": "ilorin_south"
+  },
+  {
+   "code": "ilorin_south_akanbi_ii",
+   "label": "Akanbi II",
+   "lga": "ilorin_south"
+  },
+  {
+   "code": "ilorin_south_akanbi_iii",
+   "label": "Akanbi III",
+   "lga": "ilorin_south"
+  },
+  {
+   "code": "ilorin_south_akanbi_iv",
+   "label": "Akanbi IV",
+   "lga": "ilorin_south"
+  },
+  {
+   "code": "ilorin_south_akanbi_v",
+   "label": "Akanbi V",
+   "lga": "ilorin_south"
+  },
+  {
+   "code": "ilorin_south_balogun_fulani_i",
+   "label": "Balogun Fulani I",
+   "lga": "ilorin_south"
+  },
+  {
+   "code": "ilorin_south_balogun_fulani_ii",
+   "label": "Balogun Fulani II",
+   "lga": "ilorin_south"
+  },
+  {
+   "code": "ilorin_south_balogun_fulani_iii",
+   "label": "Balogun Fulani III",
+   "lga": "ilorin_south"
+  },
+  {
+   "code": "ilorin_south_oka_ogun",
+   "label": "Oka-Ogun",
+   "lga": "ilorin_south"
+  },
+  {
+   "code": "ilorin_south_okaka_i",
+   "label": "Okaka I",
+   "lga": "ilorin_south"
+  },
+  {
+   "code": "ilorin_south_okaka_ii",
+   "label": "Okaka II",
+   "lga": "ilorin_south"
+  },
+  {
+   "code": "ilorin_west_adewole",
+   "label": "Adewole",
+   "lga": "ilorin_west"
+  },
+  {
+   "code": "ilorin_west_ajikobi",
+   "label": "Ajikobi",
+   "lga": "ilorin_west"
+  },
+  {
+   "code": "ilorin_west_alanamu",
+   "label": "Alanamu",
+   "lga": "ilorin_west"
+  },
+  {
+   "code": "ilorin_west_baboko",
+   "label": "Baboko",
+   "lga": "ilorin_west"
+  },
+  {
+   "code": "ilorin_west_badari",
+   "label": "Badari",
+   "lga": "ilorin_west"
+  },
+  {
+   "code": "ilorin_west_m_ngeri",
+   "label": "M/Ngeri",
+   "lga": "ilorin_west"
+  },
+  {
+   "code": "ilorin_west_ogidi",
+   "label": "Ogidi",
+   "lga": "ilorin_west"
+  },
+  {
+   "code": "ilorin_west_oju_ekun",
+   "label": "Oju-Ekun",
+   "lga": "ilorin_west"
+  },
+  {
+   "code": "ilorin_west_oko_erin",
+   "label": "Oko-Erin",
+   "lga": "ilorin_west"
+  },
+  {
+   "code": "ilorin_west_oloje",
+   "label": "Oloje",
+   "lga": "ilorin_west"
+  },
+  {
+   "code": "ilorin_west_ubandawaki",
+   "label": "Ubandawaki",
+   "lga": "ilorin_west"
+  },
+  {
+   "code": "ilorin_west_wara_osin_egbejila",
+   "label": "Wara/Osin/Egbejila",
+   "lga": "ilorin_west"
+  },
+  {
+   "code": "irepodun_ajase_i",
+   "label": "Ajase I",
+   "lga": "irepodun"
+  },
+  {
+   "code": "irepodun_ajase_ii",
+   "label": "Ajase II",
+   "lga": "irepodun"
+  },
+  {
+   "code": "irepodun_aran",
+   "label": "Aran",
+   "lga": "irepodun"
+  },
+  {
+   "code": "irepodun_arandun",
+   "label": "Arandun",
+   "lga": "irepodun"
+  },
+  {
+   "code": "irepodun_esie_ijan",
+   "label": "Esie-Ijan",
+   "lga": "irepodun"
+  },
+  {
+   "code": "irepodun_ifaja",
+   "label": "Ifaja",
+   "lga": "irepodun"
+  },
+  {
+   "code": "irepodun_ihaye",
+   "label": "Ihaye",
+   "lga": "irepodun"
+  },
+  {
+   "code": "irepodun_ipetu_rore_aran_orin",
+   "label": "Ipetu/Rore/Aran Orin",
+   "lga": "irepodun"
+  },
+  {
+   "code": "irepodun_oko",
+   "label": "Oko",
+   "lga": "irepodun"
+  },
+  {
+   "code": "irepodun_oro_i",
+   "label": "Oro I",
+   "lga": "irepodun"
+  },
+  {
+   "code": "irepodun_oro_ii",
+   "label": "Oro II",
+   "lga": "irepodun"
+  },
+  {
+   "code": "isin_alla",
+   "label": "Alla",
+   "lga": "isin"
+  },
+  {
+   "code": "isin_edidi",
+   "label": "Edidi",
+   "lga": "isin"
+  },
+  {
+   "code": "isin_ijara",
+   "label": "Ijara",
+   "lga": "isin"
+  },
+  {
+   "code": "isin_isanlu_i",
+   "label": "Isanlu I",
+   "lga": "isin"
+  },
+  {
+   "code": "isin_isanlu_ii",
+   "label": "Isanlu II",
+   "lga": "isin"
+  },
+  {
+   "code": "isin_iwo",
+   "label": "Iwo",
+   "lga": "isin"
+  },
+  {
+   "code": "isin_oke_aba",
+   "label": "Oke Aba",
+   "lga": "isin"
+  },
+  {
+   "code": "isin_oke_onigbin",
+   "label": "Oke Onigbin",
+   "lga": "isin"
+  },
+  {
+   "code": "isin_olla",
+   "label": "Olla",
+   "lga": "isin"
+  },
+  {
+   "code": "isin_owu",
+   "label": "Owu",
+   "lga": "isin"
+  },
+  {
+   "code": "isin_sabaja_pama_oba",
+   "label": "Sabaja/Pama/Oba",
+   "lga": "isin"
+  },
+  {
+   "code": "kaiama_adena",
+   "label": "Adena",
+   "lga": "kaiama"
+  },
+  {
+   "code": "kaiama_bani",
+   "label": "Bani",
+   "lga": "kaiama"
+  },
+  {
+   "code": "kaiama_gwanabe_i",
+   "label": "Gwanabe I",
+   "lga": "kaiama"
+  },
+  {
+   "code": "kaiama_gwanabe_ii",
+   "label": "Gwanabe II",
+   "lga": "kaiama"
+  },
+  {
+   "code": "kaiama_gwaria",
+   "label": "Gwaria",
+   "lga": "kaiama"
+  },
+  {
+   "code": "kaiama_kaiama_i",
+   "label": "Kaiama I",
+   "lga": "kaiama"
+  },
+  {
+   "code": "kaiama_kaiama_ii",
+   "label": "Kaiama II",
+   "lga": "kaiama"
+  },
+  {
+   "code": "kaiama_kaiama_iii",
+   "label": "Kaiama III",
+   "lga": "kaiama"
+  },
+  {
+   "code": "kaiama_kemaji",
+   "label": "Kemaji",
+   "lga": "kaiama"
+  },
+  {
+   "code": "kaiama_wojibe",
+   "label": "Wojibe",
+   "lga": "kaiama"
+  },
+  {
+   "code": "moro_abati_alara",
+   "label": "Abati Alara",
+   "lga": "moro"
+  },
+  {
+   "code": "moro_ajanaku_malete",
+   "label": "Ajanaku/Malete",
+   "lga": "moro"
+  },
+  {
+   "code": "moro_arobadi",
+   "label": "Arobadi",
+   "lga": "moro"
+  },
+  {
+   "code": "moro_babadudu",
+   "label": "Babadudu",
+   "lga": "moro"
+  },
+  {
+   "code": "moro_bode_saadu",
+   "label": "Bode Saadu",
+   "lga": "moro"
+  },
+  {
+   "code": "moro_egidogari",
+   "label": "Egidogari",
+   "lga": "moro"
+  },
+  {
+   "code": "moro_jebba",
+   "label": "Jebba",
+   "lga": "moro"
+  },
+  {
+   "code": "moro_jeunkunu",
+   "label": "Jeunkunu",
+   "lga": "moro"
+  },
+  {
+   "code": "moro_lanwa",
+   "label": "Lanwa",
+   "lga": "moro"
+  },
+  {
+   "code": "moro_magida",
+   "label": "Magida",
+   "lga": "moro"
+  },
+  {
+   "code": "moro_malete",
+   "label": "Malete",
+   "lga": "moro"
+  },
+  {
+   "code": "moro_okemi",
+   "label": "Okemi",
+   "lga": "moro"
+  },
+  {
+   "code": "moro_okutala",
+   "label": "Okutala",
+   "lga": "moro"
+  },
+  {
+   "code": "moro_oloru",
+   "label": "Oloru",
+   "lga": "moro"
+  },
+  {
+   "code": "moro_pakuma",
+   "label": "Pakuma",
+   "lga": "moro"
+  },
+  {
+   "code": "moro_shao",
+   "label": "Shao",
+   "lga": "moro"
+  },
+  {
+   "code": "moro_womi_ayaki",
+   "label": "Womi Ayaki",
+   "lga": "moro"
+  },
+  {
+   "code": "offa_balogun",
+   "label": "Balogun",
+   "lga": "offa"
+  },
+  {
+   "code": "offa_essa_a",
+   "label": "Essa A",
+   "lga": "offa"
+  },
+  {
+   "code": "offa_essa_b",
+   "label": "Essa B",
+   "lga": "offa"
+  },
+  {
+   "code": "offa_essa_c",
+   "label": "Essa C",
+   "lga": "offa"
+  },
+  {
+   "code": "offa_igboidun",
+   "label": "Igboidun",
+   "lga": "offa"
+  },
+  {
+   "code": "offa_ojomo_central_a",
+   "label": "Ojomo Central A",
+   "lga": "offa"
+  },
+  {
+   "code": "offa_ojomo_central_b",
+   "label": "Ojomo Central B",
+   "lga": "offa"
+  },
+  {
+   "code": "offa_ojomu_north_west",
+   "label": "Ojomu North West",
+   "lga": "offa"
+  },
+  {
+   "code": "offa_ojomu_south_east",
+   "label": "Ojomu South East",
+   "lga": "offa"
+  },
+  {
+   "code": "offa_shawo_central",
+   "label": "Shawo Central",
+   "lga": "offa"
+  },
+  {
+   "code": "offa_shawo_south_east",
+   "label": "Shawo South East",
+   "lga": "offa"
+  },
+  {
+   "code": "offa_shawo_south_west",
+   "label": "Shawo South West",
+   "lga": "offa"
+  },
+  {
+   "code": "oke_ero_aiyedun",
+   "label": "Aiyedun",
+   "lga": "oke_ero"
+  },
+  {
+   "code": "oke_ero_ekan",
+   "label": "Ekan",
+   "lga": "oke_ero"
+  },
+  {
+   "code": "oke_ero_idofin_igbana_i",
+   "label": "Idofin/Igbana I",
+   "lga": "oke_ero"
+  },
+  {
+   "code": "oke_ero_idofin_igbana_ii",
+   "label": "Idofin/Igbana II",
+   "lga": "oke_ero"
+  },
+  {
+   "code": "oke_ero_idofin_odoashe",
+   "label": "Idofin Odoashe",
+   "lga": "oke_ero"
+  },
+  {
+   "code": "oke_ero_ilale_erin_imoji",
+   "label": "Ilale /Erin/Imoji",
+   "lga": "oke_ero"
+  },
+  {
+   "code": "oke_ero_iloffa",
+   "label": "Iloffa",
+   "lga": "oke_ero"
+  },
+  {
+   "code": "oke_ero_imade_egosi",
+   "label": "Imade/Egosi",
+   "lga": "oke_ero"
+  },
+  {
+   "code": "oke_ero_odo_owa_i",
+   "label": "Odo-Owa I",
+   "lga": "oke_ero"
+  },
+  {
+   "code": "oke_ero_odo_owa_ii",
+   "label": "Odo-Owa II",
+   "lga": "oke_ero"
+  },
+  {
+   "code": "oyun_aho",
+   "label": "Aho",
+   "lga": "oyun"
+  },
+  {
+   "code": "oyun_erin_north",
+   "label": "Erin-North",
+   "lga": "oyun"
+  },
+  {
+   "code": "oyun_erin_south",
+   "label": "Erin-South",
+   "lga": "oyun"
+  },
+  {
+   "code": "oyun_igbomma",
+   "label": "Igbomma",
+   "lga": "oyun"
+  },
+  {
+   "code": "oyun_igosun",
+   "label": "Igosun",
+   "lga": "oyun"
+  },
+  {
+   "code": "oyun_ijagbo",
+   "label": "Ijagbo",
+   "lga": "oyun"
+  },
+  {
+   "code": "oyun_ikotun_kwara",
+   "label": "Ikotun-Kwara",
+   "lga": "oyun"
+  },
+  {
+   "code": "oyun_ilemoma",
+   "label": "Ilemoma",
+   "lga": "oyun"
+  },
+  {
+   "code": "oyun_ipee",
+   "label": "Ipee",
+   "lga": "oyun"
+  },
+  {
+   "code": "oyun_ira",
+   "label": "Ira",
+   "lga": "oyun"
+  },
+  {
+   "code": "oyun_ojoku",
+   "label": "Ojoku",
+   "lga": "oyun"
+  },
+  {
+   "code": "patigi_kpada_i",
+   "label": "Kpada I",
+   "lga": "patigi"
+  },
+  {
+   "code": "patigi_kpada_ii",
+   "label": "Kpada II",
+   "lga": "patigi"
+  },
+  {
+   "code": "patigi_kpada_iii",
+   "label": "Kpada III",
+   "lga": "patigi"
+  },
+  {
+   "code": "patigi_lade_i",
+   "label": "Lade I",
+   "lga": "patigi"
+  },
+  {
+   "code": "patigi_lade_ii",
+   "label": "Lade II",
+   "lga": "patigi"
+  },
+  {
+   "code": "patigi_lade_iii",
+   "label": "Lade III",
+   "lga": "patigi"
+  },
+  {
+   "code": "patigi_pategi_i",
+   "label": "Pategi I",
+   "lga": "patigi"
+  },
+  {
+   "code": "patigi_pategi_ii",
+   "label": "Pategi II",
+   "lga": "patigi"
+  },
+  {
+   "code": "patigi_pategi_iii",
+   "label": "Pategi III",
+   "lga": "patigi"
+  },
+  {
+   "code": "patigi_pategi_iv",
+   "label": "Pategi IV",
+   "lga": "patigi"
+  }
+ ],
+ "facility": [
+  {
+   "code": "asa_aboto_odoode_odo_ode_phc",
+   "label": "Odo Ode PHC",
+   "ward": "asa_aboto_odoode"
+  },
+  {
+   "code": "asa_afon_afon_district_health_unit",
+   "label": "Afon District Health Unit",
+   "ward": "asa_afon"
+  },
+  {
+   "code": "asa_agbona_fata_agbona_phc",
+   "label": "Agbona PHC",
+   "ward": "asa_agbona_fata"
+  },
+  {
+   "code": "asa_awe_orimaro_awe_model_phc",
+   "label": "Awe Model PHC",
+   "ward": "asa_awe_orimaro"
+  },
+  {
+   "code": "asa_budo_egba_budo_egba_cottage_hospital",
+   "label": "Budo Egba Cottage Hospital",
+   "ward": "asa_budo_egba"
+  },
+  {
+   "code": "asa_efue_berikodo_efue_dispensary",
+   "label": "Efue Dispensary",
+   "ward": "asa_efue_berikodo"
+  },
+  {
+   "code": "asa_gambar_ayekale_ayegun_modi_phc",
+   "label": "Ayegun Modi PHC",
+   "ward": "asa_gambar_ayekale"
+  },
+  {
+   "code": "asa_ila_oja_igbo_aran_hp",
+   "label": "Igbo Aran HP",
+   "ward": "asa_ila_oja"
+  },
+  {
+   "code": "asa_laduba_laduba_phc",
+   "label": "Laduba PHC",
+   "ward": "asa_laduba"
+  },
+  {
+   "code": "asa_ogbondoroko_ogbondoroko_reke_phc",
+   "label": "Ogbondoroko/Reke PHC",
+   "ward": "asa_ogbondoroko"
+  },
+  {
+   "code": "asa_ogele_ogele_ile_are_phc",
+   "label": "Ogele Ile Are PHC",
+   "ward": "asa_ogele"
+  },
+  {
+   "code": "asa_okeso_okeso_phc",
+   "label": "Okeso PHC",
+   "ward": "asa_okeso"
+  },
+  {
+   "code": "asa_okeweru_yow_ii_bakase_phc",
+   "label": "Bakase PHC",
+   "ward": "asa_okeweru_yow_ii"
+  },
+  {
+   "code": "asa_onire_odegiwa_alapa_phc",
+   "label": "Alapa PHC",
+   "ward": "asa_onire_odegiwa"
+  },
+  {
+   "code": "asa_otte_ballah_otte_ballah_chc",
+   "label": "Otte Ballah CHC",
+   "ward": "asa_otte_ballah"
+  },
+  {
+   "code": "asa_owode_gbogun_owode_oja_phc",
+   "label": "Owode Oja PHC",
+   "ward": "asa_owode_gbogun"
+  },
+  {
+   "code": "asa_sosoki_yowere_pasa_phc",
+   "label": "Pasa PHC",
+   "ward": "asa_sosoki_yowere"
+  },
+  {
+   "code": "baruten_bode_babane_bode_phc",
+   "label": "Bode PHC",
+   "ward": "baruten_bode_babane"
+  },
+  {
+   "code": "baruten_boriya_shiya_boriya_phc",
+   "label": "Boriya PHC",
+   "ward": "baruten_boriya_shiya"
+  },
+  {
+   "code": "baruten_boriya_shiya_phc_boriya",
+   "label": "PHC BORIYA",
+   "ward": "baruten_boriya_shiya"
+  },
+  {
+   "code": "baruten_boriya_shiya_phc_shiya",
+   "label": "PHC SHIYA",
+   "ward": "baruten_boriya_shiya"
+  },
+  {
+   "code": "baruten_bwen_kiyoru_dameru_phc",
+   "label": "Dameru PHC",
+   "ward": "baruten_bwen_kiyoru"
+  },
+  {
+   "code": "baruten_gwanara_gwanara_phc",
+   "label": "Gwanara PHC",
+   "ward": "baruten_gwanara"
+  },
+  {
+   "code": "baruten_ilesha_ilesha_baruba_cottage_hospital",
+   "label": "Ilesha Baruba Cottage Hospital",
+   "ward": "baruten_ilesha"
+  },
+  {
+   "code": "baruten_kenu_tabera_tabera_phc",
+   "label": "Tabera PHC",
+   "ward": "baruten_kenu_tabera"
+  },
+  {
+   "code": "baruten_kpura_yakiru_yakiru_phc",
+   "label": "Yakiru PHC",
+   "ward": "baruten_kpura_yakiru"
+  },
+  {
+   "code": "baruten_okuta_mhc_okuta",
+   "label": "MHC OKUTA",
+   "ward": "baruten_okuta"
+  },
+  {
+   "code": "baruten_sinawu_tumbiya_sinawu_phc",
+   "label": "Sinawu PHC",
+   "ward": "baruten_sinawu_tumbiya"
+  },
+  {
+   "code": "baruten_yashikira_i_yashikira_phc",
+   "label": "Yashikira PHC",
+   "ward": "baruten_yashikira_i"
+  },
+  {
+   "code": "baruten_yashikira_ii_npi_office_kosbosu",
+   "label": "NPI OFFICE KOSBOSU",
+   "ward": "baruten_yashikira_ii"
+  },
+  {
+   "code": "edu_lafiagi_i_npi_office_lafiagi",
+   "label": "NPI  OFFICE LAFIAGI",
+   "ward": "edu_lafiagi_i"
+  },
+  {
+   "code": "edu_lafiagi_ii_npi_office_lafiagi",
+   "label": "NPI OFFICE LAFIAGI",
+   "ward": "edu_lafiagi_ii"
+  },
+  {
+   "code": "edu_lafiagi_iii_gbugbu_dispensary",
+   "label": "Gbugbu Dispensary",
+   "ward": "edu_lafiagi_iii"
+  },
+  {
+   "code": "edu_lafiagi_iv_npi_office_lafiagi",
+   "label": "NPI OFFICE LAFIAGI",
+   "ward": "edu_lafiagi_iv"
+  },
+  {
+   "code": "edu_tsaragi_i_maternity_centre_tsaragi",
+   "label": "maternity centre Tsaragi",
+   "ward": "edu_tsaragi_i"
+  },
+  {
+   "code": "edu_tsaragi_ii_bacita_maternity_center",
+   "label": "Bacita Maternity Center",
+   "ward": "edu_tsaragi_ii"
+  },
+  {
+   "code": "edu_tsaragi_iii_tsaragi_maternity_and_dispensary",
+   "label": "Tsaragi maternity and dispensary",
+   "ward": "edu_tsaragi_iii"
+  },
+  {
+   "code": "edu_tsonga_i_maternity_shonga",
+   "label": "maternity shonga",
+   "ward": "edu_tsonga_i"
+  },
+  {
+   "code": "edu_tsonga_ii_tsonga_maternity_center",
+   "label": "Tsonga Maternity Center",
+   "ward": "edu_tsonga_ii"
+  },
+  {
+   "code": "edu_tsonga_iii_tsonga_maternity_center",
+   "label": "Tsonga Maternity Center",
+   "ward": "edu_tsonga_iii"
+  },
+  {
+   "code": "ekiti_eruku_eruku_phc",
+   "label": "Eruku PHC",
+   "ward": "ekiti_eruku"
+  },
+  {
+   "code": "ekiti_isapa_isapa_phc",
+   "label": "Isapa PHC",
+   "ward": "ekiti_isapa"
+  },
+  {
+   "code": "ekiti_koro_koro_phc",
+   "label": "Koro PHC",
+   "ward": "ekiti_koro"
+  },
+  {
+   "code": "ekiti_obbo_aiyegunle_i_obbo_aiyegunle_phc",
+   "label": "Obbo Aiyegunle PHC",
+   "ward": "ekiti_obbo_aiyegunle_i"
+  },
+  {
+   "code": "ekiti_obbo_aiyegunle_ii_awoye_phc",
+   "label": "Awoye PHC",
+   "ward": "ekiti_obbo_aiyegunle_ii"
+  },
+  {
+   "code": "ekiti_obbo_ile_obbo_ile_phcc",
+   "label": "Obbo-Ile PHCC",
+   "ward": "ekiti_obbo_ile"
+  },
+  {
+   "code": "ekiti_oke_opin_etan_oke_opin_phc",
+   "label": "Oke-Opin PHC",
+   "ward": "ekiti_oke_opin_etan"
+  },
+  {
+   "code": "ekiti_opin_isolo_opin_hc",
+   "label": "Isolo-Opin HC",
+   "ward": "ekiti_opin"
+  },
+  {
+   "code": "ekiti_osi_i_omumu_phc",
+   "label": "Omumu PHC",
+   "ward": "ekiti_osi_i"
+  },
+  {
+   "code": "ekiti_osi_ii_osi_ii_phc",
+   "label": "Osi II PHC",
+   "ward": "ekiti_osi_ii"
+  },
+  {
+   "code": "ifelodun_agwijin_agunji_model_phcc",
+   "label": "Agunji Model PHCC",
+   "ward": "ifelodun_agwijin"
+  },
+  {
+   "code": "ifelodun_idofian_i_idonfia_i_phc",
+   "label": "Idonfia I PHC",
+   "ward": "ifelodun_idofian_i"
+  },
+  {
+   "code": "ifelodun_idofian_ii_amoyo_phc",
+   "label": "Amoyo PHC",
+   "ward": "ifelodun_idofian_ii"
+  },
+  {
+   "code": "ifelodun_igbaja_i_igbaja_i_bhc",
+   "label": "Igbaja I BHC",
+   "ward": "ifelodun_igbaja_i"
+  },
+  {
+   "code": "ifelodun_igbaja_ii_igbaja_i_bhc",
+   "label": "Igbaja I BHC",
+   "ward": "ifelodun_igbaja_ii"
+  },
+  {
+   "code": "ifelodun_igbaja_iii_bhc_igbaja",
+   "label": "BHC igbaja",
+   "ward": "ifelodun_igbaja_iii"
+  },
+  {
+   "code": "ifelodun_ile_ire_bhc_afin",
+   "label": "BHC Afin",
+   "ward": "ifelodun_ile_ire"
+  },
+  {
+   "code": "ifelodun_ile_ire_bhc_babanla",
+   "label": "BHC Babanla",
+   "ward": "ifelodun_ile_ire"
+  },
+  {
+   "code": "ifelodun_ile_ire_bhc_owode",
+   "label": "BHC Owode",
+   "ward": "ifelodun_ile_ire"
+  },
+  {
+   "code": "ifelodun_oke_ode_i_oke_ode_phc",
+   "label": "Oke Ode PHC",
+   "ward": "ifelodun_oke_ode_i"
+  },
+  {
+   "code": "ifelodun_oke_ode_ii_labaka_oja_bhc",
+   "label": "Labaka Oja BHC",
+   "ward": "ifelodun_oke_ode_ii"
+  },
+  {
+   "code": "ifelodun_oke_ode_iii_shagbe_bhc",
+   "label": "Shagbe BHC",
+   "ward": "ifelodun_oke_ode_iii"
+  },
+  {
+   "code": "ifelodun_omupo_omupo_bhc",
+   "label": "Omupo BHC",
+   "ward": "ifelodun_omupo"
+  },
+  {
+   "code": "ifelodun_ora_ora_bhc",
+   "label": "Ora BHC",
+   "ward": "ifelodun_ora"
+  },
+  {
+   "code": "ifelodun_oro_ago_oro_ago_bhc",
+   "label": "Oro Ago BHC",
+   "ward": "ifelodun_oro_ago"
+  },
+  {
+   "code": "ifelodun_share_i_phc_share",
+   "label": "PHC  Share",
+   "ward": "ifelodun_share_i"
+  },
+  {
+   "code": "ifelodun_share_ii_share_gh",
+   "label": "Share GH",
+   "ward": "ifelodun_share_ii"
+  },
+  {
+   "code": "ifelodun_share_iii_babanloma_bhc",
+   "label": "Babanloma BHC",
+   "ward": "ifelodun_share_iii"
+  },
+  {
+   "code": "ifelodun_share_iv_babanloma_comprehensive_phc",
+   "label": "Babanloma Comprehensive PHC",
+   "ward": "ifelodun_share_iv"
+  },
+  {
+   "code": "ifelodun_share_v_share_junction_bhc",
+   "label": "Share Junction BHC",
+   "ward": "ifelodun_share_v"
+  },
+  {
+   "code": "ilorin_east_agbeyangi_gbadamu_agbeyangi_phc",
+   "label": "Agbeyangi PHC",
+   "ward": "ilorin_east_agbeyangi_gbadamu"
+  },
+  {
+   "code": "ilorin_east_apado_apado_phc",
+   "label": "Apado PHC",
+   "ward": "ilorin_east_apado"
+  },
+  {
+   "code": "ilorin_east_are_i_magaji_are_phc",
+   "label": "Magaji Are PHC",
+   "ward": "ilorin_east_are_i"
+  },
+  {
+   "code": "ilorin_east_are_ii_alalubosa_phc",
+   "label": "Alalubosa PHC",
+   "ward": "ilorin_east_are_ii"
+  },
+  {
+   "code": "ilorin_east_gambari_i_balogun_gambari_phc",
+   "label": "Balogun Gambari PHC",
+   "ward": "ilorin_east_gambari_i"
+  },
+  {
+   "code": "ilorin_east_gambari_ii_oja_gboro_phc",
+   "label": "Oja Gboro PHC",
+   "ward": "ilorin_east_gambari_ii"
+  },
+  {
+   "code": "ilorin_east_ibagun_okelele_phc",
+   "label": "Okelele PHC",
+   "ward": "ilorin_east_ibagun"
+  },
+  {
+   "code": "ilorin_east_iponrin_iponrin_phc",
+   "label": "Iponrin PHC",
+   "ward": "ilorin_east_iponrin"
+  },
+  {
+   "code": "ilorin_east_marafa_pepele_marafa_phc",
+   "label": "Marafa PHC",
+   "ward": "ilorin_east_marafa_pepele"
+  },
+  {
+   "code": "ilorin_east_maya_ileapa_maya_hp",
+   "label": "Maya HP",
+   "ward": "ilorin_east_maya_ileapa"
+  },
+  {
+   "code": "ilorin_east_oke_oyi_oke_ose_alalubosa_oke_ose_model_phc",
+   "label": "Oke Ose Model PHC",
+   "ward": "ilorin_east_oke_oyi_oke_ose_alalubosa"
+  },
+  {
+   "code": "ilorin_east_zango_i_okesuna_phc",
+   "label": "Okesuna PHC",
+   "ward": "ilorin_east_zango_i"
+  },
+  {
+   "code": "ilorin_south_akanbi_i_ilota_apaola_phc",
+   "label": "Ilota Apaola PHC",
+   "ward": "ilorin_south_akanbi_i"
+  },
+  {
+   "code": "ilorin_south_akanbi_ii_magaji_ajomu_phc",
+   "label": "Magaji Ajomu PHC",
+   "ward": "ilorin_south_akanbi_ii"
+  },
+  {
+   "code": "ilorin_south_akanbi_iii_ero_omo_phc",
+   "label": "ERO OMO PHC",
+   "ward": "ilorin_south_akanbi_iii"
+  },
+  {
+   "code": "ilorin_south_akanbi_iv_moh",
+   "label": "MOH",
+   "ward": "ilorin_south_akanbi_iv"
+  },
+  {
+   "code": "ilorin_south_akanbi_iv_tanke_phc",
+   "label": "Tanke PHC",
+   "ward": "ilorin_south_akanbi_iv"
+  },
+  {
+   "code": "ilorin_south_akanbi_v_kulende_phc",
+   "label": "KULENDE PHC",
+   "ward": "ilorin_south_akanbi_v"
+  },
+  {
+   "code": "ilorin_south_akanbi_v_ogidi_cottage",
+   "label": "OGIDI COTTAGE",
+   "ward": "ilorin_south_akanbi_v"
+  },
+  {
+   "code": "ilorin_south_akanbi_v_sobi_specialist",
+   "label": "SOBI SPECIALIST",
+   "ward": "ilorin_south_akanbi_v"
+  },
+  {
+   "code": "ilorin_south_balogun_fulani_i_igboro_children_specialist_center",
+   "label": "Igboro Children Specialist Center",
+   "ward": "ilorin_south_balogun_fulani_i"
+  },
+  {
+   "code": "ilorin_south_balogun_fulani_ii_balogun_fulani_phc",
+   "label": "Balogun Fulani PHC",
+   "ward": "ilorin_south_balogun_fulani_ii"
+  },
+  {
+   "code": "ilorin_south_balogun_fulani_iii_isale_asa_phc",
+   "label": "Isale Asa PHC",
+   "ward": "ilorin_south_balogun_fulani_iii"
+  },
+  {
+   "code": "ilorin_south_oka_ogun_olufadi_phc",
+   "label": "Olufadi PHC",
+   "ward": "ilorin_south_oka_ogun"
+  },
+  {
+   "code": "ilorin_south_okaka_i_magaji_okaka_phc",
+   "label": "Magaji Okaka PHC",
+   "ward": "ilorin_south_okaka_i"
+  },
+  {
+   "code": "ilorin_south_okaka_ii_balogun_afin",
+   "label": "Balogun Afin",
+   "ward": "ilorin_south_okaka_ii"
+  },
+  {
+   "code": "ilorin_west_adewole_adewole_bhc",
+   "label": "Adewole BHC",
+   "ward": "ilorin_west_adewole"
+  },
+  {
+   "code": "ilorin_west_adewole_adewole_phc",
+   "label": "Adewole PHC",
+   "ward": "ilorin_west_adewole"
+  },
+  {
+   "code": "ilorin_west_ajikobi_omoda_phc",
+   "label": "Omoda PHC",
+   "ward": "ilorin_west_ajikobi"
+  },
+  {
+   "code": "ilorin_west_alanamu_alanumu_bhc",
+   "label": "Alanumu BHC",
+   "ward": "ilorin_west_alanamu"
+  },
+  {
+   "code": "ilorin_west_baboko_alapata_phc",
+   "label": "Alapata PHC",
+   "ward": "ilorin_west_baboko"
+  },
+  {
+   "code": "ilorin_west_badari_badari_bhc",
+   "label": "Badari BHC",
+   "ward": "ilorin_west_badari"
+  },
+  {
+   "code": "ilorin_west_m_ngeri_majagi_ngeri_phc",
+   "label": "Majagi Ngeri PHC",
+   "ward": "ilorin_west_m_ngeri"
+  },
+  {
+   "code": "ilorin_west_ogidi_ogidi_banni_phc",
+   "label": "Ogidi Banni PHC",
+   "ward": "ilorin_west_ogidi"
+  },
+  {
+   "code": "ilorin_west_oju_ekun_zarumi_phc",
+   "label": "Zarumi PHC",
+   "ward": "ilorin_west_oju_ekun"
+  },
+  {
+   "code": "ilorin_west_oko_erin_oko_erin_phc",
+   "label": "Oko-Erin PHC",
+   "ward": "ilorin_west_oko_erin"
+  },
+  {
+   "code": "ilorin_west_oloje_oloje_phc",
+   "label": "Oloje PHC",
+   "ward": "ilorin_west_oloje"
+  },
+  {
+   "code": "ilorin_west_ubandawaki_pakata_phc",
+   "label": "Pakata PHC",
+   "ward": "ilorin_west_ubandawaki"
+  },
+  {
+   "code": "ilorin_west_wara_osin_egbejila_egbejila_phc",
+   "label": "Egbejila PHC",
+   "ward": "ilorin_west_wara_osin_egbejila"
+  },
+  {
+   "code": "ilorin_west_wara_osin_egbejila_offa_garage_phc",
+   "label": "Offa Garage PHC",
+   "ward": "ilorin_west_wara_osin_egbejila"
+  },
+  {
+   "code": "ilorin_west_wara_osin_egbejila_wara_chc",
+   "label": "Wara CHC",
+   "ward": "ilorin_west_wara_osin_egbejila"
+  },
+  {
+   "code": "irepodun_ajase_i_ajase_ipo_phc",
+   "label": "Ajase Ipo PHC",
+   "ward": "irepodun_ajase_i"
+  },
+  {
+   "code": "irepodun_ajase_ii_agbamu_phc",
+   "label": "Agbamu PHC",
+   "ward": "irepodun_ajase_ii"
+  },
+  {
+   "code": "irepodun_aran_ofe_aran_phc",
+   "label": "Ofe Aran PHC",
+   "ward": "irepodun_aran"
+  },
+  {
+   "code": "irepodun_aran_ofe_aranphc",
+   "label": "Ofe AranPHC",
+   "ward": "irepodun_aran"
+  },
+  {
+   "code": "irepodun_arandun_arandun_phc",
+   "label": "Arandun PHC",
+   "ward": "irepodun_arandun"
+  },
+  {
+   "code": "irepodun_esie_ijan_esie_phc",
+   "label": "Esie PHC",
+   "ward": "irepodun_esie_ijan"
+  },
+  {
+   "code": "irepodun_ifaja_ifaja_phc",
+   "label": "Ifaja PHC",
+   "ward": "irepodun_ifaja"
+  },
+  {
+   "code": "irepodun_ihaye_orolodo_phc",
+   "label": "Orolodo PHC",
+   "ward": "irepodun_ihaye"
+  },
+  {
+   "code": "irepodun_ipetu_rore_aran_orin_aran_orin_phc",
+   "label": "Aran Orin PHC",
+   "ward": "irepodun_ipetu_rore_aran_orin"
+  },
+  {
+   "code": "irepodun_oko_oko_phc",
+   "label": "Oko PHC",
+   "ward": "irepodun_oko"
+  },
+  {
+   "code": "irepodun_oro_i_ayegbemi_ijomu_cottage_hospital",
+   "label": "Ayegbemi Ijomu Cottage Hospital",
+   "ward": "irepodun_oro_i"
+  },
+  {
+   "code": "irepodun_oro_ii_oke_ola_phc",
+   "label": "Oke Ola PHC",
+   "ward": "irepodun_oro_ii"
+  },
+  {
+   "code": "isin_alla_alla_phc",
+   "label": "Alla PHC",
+   "ward": "isin_alla"
+  },
+  {
+   "code": "isin_edidi_edidi_phc",
+   "label": "Edidi PHC",
+   "ward": "isin_edidi"
+  },
+  {
+   "code": "isin_ijara_ijara_phc",
+   "label": "Ijara PHC",
+   "ward": "isin_ijara"
+  },
+  {
+   "code": "isin_isanlu_i_isanlu_isin_phc",
+   "label": "Isanlu Isin PHC",
+   "ward": "isin_isanlu_i"
+  },
+  {
+   "code": "isin_isanlu_ii_isanlu_isin_phc",
+   "label": "Isanlu Isin PHC",
+   "ward": "isin_isanlu_ii"
+  },
+  {
+   "code": "isin_iwo_iwo_chc",
+   "label": "Iwo CHC",
+   "ward": "isin_iwo"
+  },
+  {
+   "code": "isin_oke_aba_oke_aba_phc",
+   "label": "Oke Aba PHC",
+   "ward": "isin_oke_aba"
+  },
+  {
+   "code": "isin_oke_onigbin_oke_onigbin_phc",
+   "label": "Oke Onigbin PHC",
+   "ward": "isin_oke_onigbin"
+  },
+  {
+   "code": "isin_olla_olla_ward",
+   "label": "Olla Ward",
+   "ward": "isin_olla"
+  },
+  {
+   "code": "isin_owu_owu_isin_model_phcc",
+   "label": "Owu-Isin Model PHCC",
+   "ward": "isin_owu"
+  },
+  {
+   "code": "isin_sabaja_pama_oba_sabaja_phc",
+   "label": "Sabaja PHC",
+   "ward": "isin_sabaja_pama_oba"
+  },
+  {
+   "code": "kaiama_adena_adena_phc",
+   "label": "Adena phc",
+   "ward": "kaiama_adena"
+  },
+  {
+   "code": "kaiama_adena_gbajibo",
+   "label": "gbajibo",
+   "ward": "kaiama_adena"
+  },
+  {
+   "code": "kaiama_adena_gbajibo_phc",
+   "label": "Gbajibo PHC",
+   "ward": "kaiama_adena"
+  },
+  {
+   "code": "kaiama_adena_kossa",
+   "label": "kossa",
+   "ward": "kaiama_adena"
+  },
+  {
+   "code": "kaiama_adena_kossa_phc",
+   "label": "Kossa PHC",
+   "ward": "kaiama_adena"
+  },
+  {
+   "code": "kaiama_bani_bhc_bani",
+   "label": "BHC Bani",
+   "ward": "kaiama_bani"
+  },
+  {
+   "code": "kaiama_bani_famini_phc",
+   "label": "Famini PHC",
+   "ward": "kaiama_bani"
+  },
+  {
+   "code": "kaiama_bani_hamdallahi_phc",
+   "label": "Hamdallahi PHC",
+   "ward": "kaiama_bani"
+  },
+  {
+   "code": "kaiama_gwanabe_i_gorobani_phc",
+   "label": "Gorobani PHC",
+   "ward": "kaiama_gwanabe_i"
+  },
+  {
+   "code": "kaiama_gwanabe_i_kanikoko_phc",
+   "label": "Kanikoko PHC",
+   "ward": "kaiama_gwanabe_i"
+  },
+  {
+   "code": "kaiama_gwanabe_i_venra_phc",
+   "label": "Venra PHC",
+   "ward": "kaiama_gwanabe_i"
+  },
+  {
+   "code": "kaiama_gwanabe_i_woro_phc",
+   "label": "Woro PHC",
+   "ward": "kaiama_gwanabe_i"
+  },
+  {
+   "code": "kaiama_gwanabe_ii_aboki_phc",
+   "label": "Aboki PHC",
+   "ward": "kaiama_gwanabe_ii"
+  },
+  {
+   "code": "kaiama_gwanabe_ii_atiku_phc",
+   "label": "Atiku PHC",
+   "ward": "kaiama_gwanabe_ii"
+  },
+  {
+   "code": "kaiama_gwanabe_ii_atikui_phc",
+   "label": "Atikui PHC",
+   "ward": "kaiama_gwanabe_ii"
+  },
+  {
+   "code": "kaiama_gwaria_gwaria_phc",
+   "label": "Gwaria PHC",
+   "ward": "kaiama_gwaria"
+  },
+  {
+   "code": "kaiama_kaiama_i_buka_biu_phc",
+   "label": "Buka Biu PHC",
+   "ward": "kaiama_kaiama_i"
+  },
+  {
+   "code": "kaiama_kaiama_ii_kaiama_maternity_and_child_welfare_clinic",
+   "label": "Kaiama Maternity and Child Welfare Clinic",
+   "ward": "kaiama_kaiama_ii"
+  },
+  {
+   "code": "kaiama_kaiama_iii_kaiama_school_clinic",
+   "label": "Kaiama School Clinic",
+   "ward": "kaiama_kaiama_iii"
+  },
+  {
+   "code": "kaiama_kemaji_kemanji_phc",
+   "label": "kemanji phc",
+   "ward": "kaiama_kemaji"
+  },
+  {
+   "code": "kaiama_kemaji_tenebo",
+   "label": "Tenebo",
+   "ward": "kaiama_kemaji"
+  },
+  {
+   "code": "kaiama_kemaji_tenebo_phc",
+   "label": "Tenebo phc",
+   "ward": "kaiama_kemaji"
+  },
+  {
+   "code": "kaiama_wojibe_kugiji_phc",
+   "label": "Kugiji PHC",
+   "ward": "kaiama_wojibe"
+  },
+  {
+   "code": "moro_abati_alara_abati_alara_phc",
+   "label": "Abati Alara PHC",
+   "ward": "moro_abati_alara"
+  },
+  {
+   "code": "moro_ajanaku_malete_agbaku_agar_phc",
+   "label": "Agbaku Agar PHC",
+   "ward": "moro_ajanaku_malete"
+  },
+  {
+   "code": "moro_arobadi_arobadi_phc",
+   "label": "Arobadi PHC",
+   "ward": "moro_arobadi"
+  },
+  {
+   "code": "moro_babadudu_agbaku_eji_phc",
+   "label": "Agbaku eji PHC",
+   "ward": "moro_babadudu"
+  },
+  {
+   "code": "moro_babadudu_igbo_emu_phc",
+   "label": "Igbo - Emu PHC",
+   "ward": "moro_babadudu"
+  },
+  {
+   "code": "moro_bode_saadu_bode_saadu_phc",
+   "label": "Bode Saadu PHC",
+   "ward": "moro_bode_saadu"
+  },
+  {
+   "code": "moro_egidogari_oloko_and_egidongari_phc",
+   "label": "Oloko And Egidongari PHC",
+   "ward": "moro_egidogari"
+  },
+  {
+   "code": "moro_jebba_aho_area_phc",
+   "label": "Aho Area PHC",
+   "ward": "moro_jebba"
+  },
+  {
+   "code": "moro_jeunkunu_jeuhunkunnu_hp",
+   "label": "Jeuhunkunnu HP",
+   "ward": "moro_jeunkunu"
+  },
+  {
+   "code": "moro_lanwa_lanwa_phc",
+   "label": "Lanwa PHC",
+   "ward": "moro_lanwa"
+  },
+  {
+   "code": "moro_magida_bhc_ipaiye",
+   "label": "BHC ipaiye",
+   "ward": "moro_magida"
+  },
+  {
+   "code": "moro_malete_malete_chc",
+   "label": "Malete CHC",
+   "ward": "moro_malete"
+  },
+  {
+   "code": "moro_okemi_olowoda_hp",
+   "label": "Olowoda HP",
+   "ward": "moro_okemi"
+  },
+  {
+   "code": "moro_okemi_olowode_hp",
+   "label": "Olowode HP",
+   "ward": "moro_okemi"
+  },
+  {
+   "code": "moro_okutala_gbangbala_phc",
+   "label": "Gbangbala PHC",
+   "ward": "moro_okutala"
+  },
+  {
+   "code": "moro_okutala_sumela_phc",
+   "label": "Sumela PHC",
+   "ward": "moro_okutala"
+  },
+  {
+   "code": "moro_oloru_oloru_phc",
+   "label": "Oloru PHC",
+   "ward": "moro_oloru"
+  },
+  {
+   "code": "moro_pakuma_budo_oke_phc",
+   "label": "Budo-Oke PHC",
+   "ward": "moro_pakuma"
+  },
+  {
+   "code": "moro_pakuma_elemere",
+   "label": "Elemere",
+   "ward": "moro_pakuma"
+  },
+  {
+   "code": "moro_pakuma_malete",
+   "label": "Malete",
+   "ward": "moro_pakuma"
+  },
+  {
+   "code": "moro_shao_shao_phc",
+   "label": "Shao PHC",
+   "ward": "moro_shao"
+  },
+  {
+   "code": "moro_womi_ayaki_elemere_phc",
+   "label": "Elemere PHC",
+   "ward": "moro_womi_ayaki"
+  },
+  {
+   "code": "offa_balogun_balogun_bhc",
+   "label": "Balogun BHC",
+   "ward": "offa_balogun"
+  },
+  {
+   "code": "offa_essa_a_essa_phcc",
+   "label": "Essa PHCC",
+   "ward": "offa_essa_a"
+  },
+  {
+   "code": "offa_essa_b_ayaba_phc",
+   "label": "Ayaba PHC",
+   "ward": "offa_essa_b"
+  },
+  {
+   "code": "offa_essa_c_nawarudeen_phc",
+   "label": "Nawarudeen PHC",
+   "ward": "offa_essa_c"
+  },
+  {
+   "code": "offa_igboidun_igboidun_chc",
+   "label": "Igboidun CHC",
+   "ward": "offa_igboidun"
+  },
+  {
+   "code": "offa_ojomo_central_a_ojomu_phcc",
+   "label": "Ojomu PHCC",
+   "ward": "offa_ojomo_central_a"
+  },
+  {
+   "code": "offa_ojomo_central_b_oluyemoh_bhc",
+   "label": "Oluyemoh BHC",
+   "ward": "offa_ojomo_central_b"
+  },
+  {
+   "code": "offa_ojomu_north_west_offa_npi_office",
+   "label": "Offa NPI Office",
+   "ward": "offa_ojomu_north_west"
+  },
+  {
+   "code": "offa_ojomu_south_east_giwa",
+   "label": "Giwa",
+   "ward": "offa_ojomu_south_east"
+  },
+  {
+   "code": "offa_shawo_central_abogiunugu_phc",
+   "label": "Abogiunugu PHC",
+   "ward": "offa_shawo_central"
+  },
+  {
+   "code": "offa_shawo_central_abogunnugun_phc",
+   "label": "Abogunnugun PHC",
+   "ward": "offa_shawo_central"
+  },
+  {
+   "code": "offa_shawo_south_east_opp_olatinwo_estate",
+   "label": "Opp Olatinwo Estate",
+   "ward": "offa_shawo_south_east"
+  },
+  {
+   "code": "offa_shawo_south_west_col_toki",
+   "label": "Col. Toki",
+   "ward": "offa_shawo_south_west"
+  },
+  {
+   "code": "oke_ero_aiyedun_aiyedun_phc",
+   "label": "Aiyedun PHC",
+   "ward": "oke_ero_aiyedun"
+  },
+  {
+   "code": "oke_ero_ekan_ekan_phc",
+   "label": "Ekan PHC",
+   "ward": "oke_ero_ekan"
+  },
+  {
+   "code": "oke_ero_idofin_igbana_i_odeda_phc",
+   "label": "Odeda PHC",
+   "ward": "oke_ero_idofin_igbana_i"
+  },
+  {
+   "code": "oke_ero_idofin_igbana_ii_idofin_igbana_model_hc",
+   "label": "Idofin Igbana Model HC",
+   "ward": "oke_ero_idofin_igbana_ii"
+  },
+  {
+   "code": "oke_ero_idofin_odoashe_idofin_odo_ashe_council_hall",
+   "label": "Idofin odo-Ashe council Hall",
+   "ward": "oke_ero_idofin_odoashe"
+  },
+  {
+   "code": "oke_ero_ilale_erin_imoji_ilale_erin_imoji_phc",
+   "label": "Ilale/Erin Imoji PHC",
+   "ward": "oke_ero_ilale_erin_imoji"
+  },
+  {
+   "code": "oke_ero_iloffa_iloffa_odo_owa_phc",
+   "label": "Iloffa Odo Owa PHC",
+   "ward": "oke_ero_iloffa"
+  },
+  {
+   "code": "oke_ero_imade_egosi_imade_phc",
+   "label": "Imade PHC",
+   "ward": "oke_ero_imade_egosi"
+  },
+  {
+   "code": "oke_ero_odo_owa_i_odo_owa_i_phc",
+   "label": "Odo-Owa I PHC",
+   "ward": "oke_ero_odo_owa_i"
+  },
+  {
+   "code": "oke_ero_odo_owa_ii_odo_owa_ii_bhc",
+   "label": "Odo-Owa II BHC",
+   "ward": "oke_ero_odo_owa_ii"
+  },
+  {
+   "code": "oyun_aho_aho_bhc",
+   "label": "Aho BHC",
+   "ward": "oyun_aho"
+  },
+  {
+   "code": "oyun_erin_north_erin_north_bhc",
+   "label": "Erin North BHC",
+   "ward": "oyun_erin_north"
+  },
+  {
+   "code": "oyun_erin_south_erin_ile_south_bhc",
+   "label": "Erin-Ile South BHC",
+   "ward": "oyun_erin_south"
+  },
+  {
+   "code": "oyun_igbomma_igbomma_bhc",
+   "label": "Igbomma BHC",
+   "ward": "oyun_igbomma"
+  },
+  {
+   "code": "oyun_igosun_igosun_bhc",
+   "label": "Igosun BHC",
+   "ward": "oyun_igosun"
+  },
+  {
+   "code": "oyun_ijagbo_ijagbo_bhc",
+   "label": "Ijagbo BHC",
+   "ward": "oyun_ijagbo"
+  },
+  {
+   "code": "oyun_ikotun_kwara_ikotun_bhc",
+   "label": "Ikotun BHC",
+   "ward": "oyun_ikotun_kwara"
+  },
+  {
+   "code": "oyun_ilemoma_ilemoma_bhc",
+   "label": "Ilemoma BHC",
+   "ward": "oyun_ilemoma"
+  },
+  {
+   "code": "oyun_ipee_ipe_bhc",
+   "label": "Ipe BHC",
+   "ward": "oyun_ipee"
+  },
+  {
+   "code": "oyun_ira_ira_bhc",
+   "label": "Ira BHC",
+   "ward": "oyun_ira"
+  },
+  {
+   "code": "oyun_ojoku_ojoku_bhc",
+   "label": "Ojoku BHC",
+   "ward": "oyun_ojoku"
+  },
+  {
+   "code": "patigi_kpada_i_kpada_model_phc",
+   "label": "Kpada Model PHC",
+   "ward": "patigi_kpada_i"
+  },
+  {
+   "code": "patigi_kpada_ii_rogun_chc",
+   "label": "Rogun CHC",
+   "ward": "patigi_kpada_ii"
+  },
+  {
+   "code": "patigi_kpada_iii_rifun_phc",
+   "label": "Rifun PHC",
+   "ward": "patigi_kpada_iii"
+  },
+  {
+   "code": "patigi_lade_i_basic_health_center_ekati",
+   "label": "Basic Health Center Ekati",
+   "ward": "patigi_lade_i"
+  },
+  {
+   "code": "patigi_lade_i_bongi",
+   "label": "Bongi",
+   "ward": "patigi_lade_i"
+  },
+  {
+   "code": "patigi_lade_i_maternity_and_dispensary_gada_bozuwa",
+   "label": "Maternity and dispensary Gada-bozuwa",
+   "ward": "patigi_lade_i"
+  },
+  {
+   "code": "patigi_lade_ii_cottage_hospital_lade",
+   "label": "cottage hospital lade",
+   "ward": "patigi_lade_ii"
+  },
+  {
+   "code": "patigi_lade_ii_ndanaku_town_dispensary",
+   "label": "Ndanaku Town dispensary",
+   "ward": "patigi_lade_ii"
+  },
+  {
+   "code": "patigi_lade_iii_sakpesu_phc",
+   "label": "Sakpesu PHC",
+   "ward": "patigi_lade_iii"
+  },
+  {
+   "code": "patigi_pategi_i_patigi_infant_welfare_clinic",
+   "label": "Patigi Infant Welfare Clinic",
+   "ward": "patigi_pategi_i"
+  },
+  {
+   "code": "patigi_pategi_ii_efu_makun_bhc",
+   "label": "Efu Makun BHC",
+   "ward": "patigi_pategi_ii"
+  },
+  {
+   "code": "patigi_pategi_iii_pategi_gh_a",
+   "label": "Pategi GH A",
+   "ward": "patigi_pategi_iii"
+  },
+  {
+   "code": "patigi_pategi_iv_pategi_gh_b",
+   "label": "Pategi GH B",
+   "ward": "patigi_pategi_iv"
+  }
+ ],
+ "facility_type": [
+  {
+   "code": "phc",
+   "label": "PHC"
+  },
+  {
+   "code": "basic",
+   "label": "Basic Health Clinic"
+  },
+  {
+   "code": "hc",
+   "label": "Health Centre"
+  },
+  {
+   "code": "hp",
+   "label": "Health Post"
+  },
+  {
+   "code": "chc",
+   "label": "Comprehensive Health Centre"
+  },
+  {
+   "code": "other",
+   "label": "Other"
+  }
+ ],
+ "visit_type": [
+  {
+   "code": "routine",
+   "label": "Routine"
+  },
+  {
+   "code": "followup",
+   "label": "Follow-up"
+  },
+  {
+   "code": "targeted",
+   "label": "Targeted"
+  },
+  {
+   "code": "emergency",
+   "label": "Emergency/Incident"
+  }
+ ],
+ "responsible_level": [
+  {
+   "code": "facility",
+   "label": "Facility"
+  },
+  {
+   "code": "lga",
+   "label": "LGA"
+  },
+  {
+   "code": "state",
+   "label": "State"
+  },
+  {
+   "code": "partner",
+   "label": "Partner/Other"
+  }
+ ],
+ "action_status": [
+  {
+   "code": "open",
+   "label": "Open"
+  },
+  {
+   "code": "in_progress",
+   "label": "In Progress"
+  },
+  {
+   "code": "closed",
+   "label": "Closed"
+  },
+  {
+   "code": "escalated",
+   "label": "Escalated"
+  },
+  {
+   "code": "not_required",
+   "label": "Not Required"
+  }
+ ]
+}
