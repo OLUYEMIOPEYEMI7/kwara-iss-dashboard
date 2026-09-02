@@ -1,1 +1,185 @@
-PLACEHOLDER_INDEX
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kwara State ISS — Field Monitoring Dashboard</title>
+<meta name="description" content="Supervision coverage, thematic performance and data-quality monitoring for the Kwara State Integrated Supportive Supervision programme.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">K</div>
+      <div class="brand-text">
+        <h1>Kwara State ISS</h1>
+        <p>Integrated Supportive Supervision</p>
+      </div>
+    </div>
+
+    <div class="side-block">
+      <p class="side-label">Location <span class="count" id="geoVisitCount">—</span></p>
+      <div class="geo-path">
+        <div class="geo-row is-active">
+          <span style="font-size:13px;color:#fff;font-weight:600;">Kwara State</span>
+        </div>
+        <div class="geo-row">
+          <select class="geo-select" id="selLga"><option value="">All LGAs</option></select>
+        </div>
+        <div class="geo-row">
+          <select class="geo-select" id="selWard" disabled><option value="">All wards</option></select>
+        </div>
+        <div class="geo-row">
+          <select class="geo-select" id="selFacility" disabled><option value="">All facilities</option></select>
+        </div>
+      </div>
+      <button class="side-reset" id="btnResetGeo">Reset location</button>
+    </div>
+
+    <div class="side-block">
+      <p class="side-label">Filters</p>
+      <div class="filter-group">
+        <select class="filter-select" id="selVisitType">
+          <option value="">All visit types</option>
+        </select>
+        <select class="filter-select" id="selPeriod">
+          <option value="all">All dates</option>
+          <option value="30">Last 30 days</option>
+          <option value="90">Last 90 days</option>
+          <option value="180">Last 180 days</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="side-block">
+      <p class="side-label">Weakest facilities</p>
+      <div class="mini-rank" id="miniRank"></div>
+    </div>
+
+    <div class="side-source">
+      Data source: KoboToolbox form
+      <a href="https://ee.kobotoolbox.org/XpP4DMwV" target="_blank" rel="noopener">open collection form ↗</a>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <div class="topbar">
+      <div>
+        <h2>Field Monitoring Dashboard</h2>
+        <p class="scope-line" id="scopeLine">Showing <b>all 16 LGAs</b> &middot; <b id="scopeCount">0</b> supervision visits</p>
+      </div>
+      <div class="topbar-right">
+        <div class="data-toggle" role="group" aria-label="Data source">
+          <button id="btnLive" class="is-on">Live data</button>
+          <button id="btnSample">Sample preview</button>
+        </div>
+        <span class="updated-note" id="updatedNote">—</span>
+        <a class="btn" href="https://ee.kobotoolbox.org/XpP4DMwV" target="_blank" rel="noopener">Record a visit</a>
+      </div>
+    </div>
+
+    <!-- Summary strip -->
+    <section class="section">
+      <div class="stat-strip" id="statStrip"></div>
+    </section>
+
+    <!-- Thematic domains -->
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h3>Thematic performance</h3>
+          <p>Weighted domain scores across filtered visits. Select a domain for the item-level breakdown that is driving it.</p>
+        </div>
+        <span class="section-tag">Click a domain to inspect</span>
+      </div>
+      <div class="card-grid" id="domainGrid"></div>
+      <div class="analysis-panel" id="domainPanel"></div>
+    </section>
+
+    <!-- Tracer indicators -->
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h3>Tracer indicators</h3>
+          <p>Programme KPIs compared with the prior reporting period at each visited facility.</p>
+        </div>
+        <span class="section-tag">Click an indicator to inspect</span>
+      </div>
+      <div class="kpi-grid" id="kpiGrid"></div>
+      <div class="analysis-panel" id="kpiPanel"></div>
+    </section>
+
+    <!-- Data quality + Action tracker -->
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h3>Data quality &amp; corrective actions</h3>
+          <p>Automated flags on submissions, plus the status of agreed corrective actions.</p>
+        </div>
+      </div>
+      <div class="panel-grid">
+        <div class="panel">
+          <h4>Flags requiring attention</h4>
+          <p class="panel-note">Critical red flags, reporting-quality flags and unusual indicator swings, most recent first.</p>
+          <div id="flagList"></div>
+        </div>
+        <div class="panel">
+          <h4>Corrective action tracker</h4>
+          <p class="panel-note">Status of action points agreed at exit meetings.</p>
+          <div class="action-counts" id="actionCounts"></div>
+          <div id="actionOverdue"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Facility register -->
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h3>Facility register</h3>
+          <p>Every supervised facility in the current scope, ranked by most recent classification.</p>
+        </div>
+      </div>
+      <div class="register-wrap">
+        <table class="register" id="registerTable">
+          <thead>
+            <tr>
+              <th data-sort="facility">Facility</th>
+              <th data-sort="lga">LGA / Ward</th>
+              <th data-sort="visits">Visits</th>
+              <th data-sort="last">Last visit</th>
+              <th data-sort="score">Score</th>
+              <th data-sort="class">Classification</th>
+              <th data-sort="flags">Flags</th>
+            </tr>
+          </thead>
+          <tbody id="registerBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <span>Kwara State Ministry of Health &amp; Human Services — Integrated Supportive Supervision</span>
+      <span>Built on <a href="https://kf.kobotoolbox.org/api/v2/assets/a3px58eSfDuyg3PLUdNBpR/" target="_blank" rel="noopener">KoboToolbox</a> &middot; form ID a3px58eSfDuyg3PLUdNBpR</span>
+    </footer>
+
+  </main>
+</div>
+
+<!-- Facility drawer -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="drawer" id="drawer">
+  <button class="drawer-close" id="drawerClose" aria-label="Close">&times;</button>
+  <h3 id="drawerTitle">Facility</h3>
+  <p class="drawer-sub" id="drawerSub"></p>
+  <div id="drawerBody"></div>
+</aside>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
