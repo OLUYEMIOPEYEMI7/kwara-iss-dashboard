@@ -1226,6 +1226,11 @@
     return "<ul>" + items.map((i) => "<li>" + i + "</li>").join("") + "</ul>";
   }
 
+  function olHtml(items, emptyMsg) {
+    if (!items.length) return "<p class='na'>" + (emptyMsg || "None recorded.") + "</p>";
+    return "<ol>" + items.map((i) => "<li>" + i + "</li>").join("") + "</ol>";
+  }
+
   function globalWeakestItems(schema, computed, limit) {
     const stats = [];
     schema.domains.forEach((d) => {
@@ -1400,10 +1405,15 @@
     const cover =
       "<div class='cover'>" +
       "<div class='cover-badge'>KWARA STATE PRIMARY HEALTH CARE DEVELOPMENT AGENCY</div>" +
+      "<div class='cover-line'></div>" +
       "<h1 class='cover-title'>Integrated Supportive Supervision</h1>" +
-      "<div class='cover-sub'>Field Monitoring Report</div>" +
-      "<div class='cover-scope'>" + scope + "</div>" +
-      "<div class='cover-meta'>Report generated: " + genDate + "<br>Supervision visits in scope: " + n + "<br>Reporting basis: KoboToolbox digital supportive supervision checklist</div>" +
+      "<div class='cover-sub'>Field Monitoring Report — " + scope + "</div>" +
+      "<div class='cover-meta-box'>" +
+      "<div><b>Reporting scope:</b> " + scope + "</div>" +
+      "<div><b>Report generated:</b> " + genDate + "</div>" +
+      "<div><b>Supervision visits in scope:</b> " + n + "</div>" +
+      "<div><b>Reporting basis:</b> KoboToolbox digital supportive supervision checklist</div>" +
+      "</div>" +
       "</div>" + pageBreak;
 
     const secExecSummary =
@@ -1492,7 +1502,7 @@
       "<h2>12. Challenges</h2><p class='subhead'>Weakest checklist items across all visited facilities</p>" + ulHtml(challenges);
 
     const secRecommendations =
-      pageBreak + "<h2>13. Recommendations</h2>" + ulHtml(recommendations, "No recommendations — no visits recorded in this scope.");
+      pageBreak + "<h2>13. Recommendations</h2>" + olHtml(recommendations, "No recommendations — no visits recorded in this scope.");
 
     const secActionPlan =
       "<h2>14. Action Plan</h2><p>Open corrective actions from visits in this scope, oldest due date first.</p>" +
@@ -1509,24 +1519,47 @@
     const secConclusion =
       pageBreak + "<h2>15. Conclusion</h2><p>" + conclusion + "</p>";
 
+    const toc = [
+      "1. Executive Summary", "2. Background", "3. Objectives", "4. Methodology", "5. Key Performance Indicators",
+      "6. Trend Analysis", "7. Geographic / LGA Performance", "8. Data Quality", "9. Surveillance & Routine Reporting Performance",
+      "10. Activities Implemented", "11. Key Findings", "12. Challenges", "13. Recommendations", "14. Action Plan", "15. Conclusion",
+    ];
+    const secToc = pageBreak + "<h2 style='border-bottom:none;'>Contents</h2>" + "<table class='toc-table'>" + toc.map((t) => "<tr><td>" + t + "</td></tr>").join("") + "</table>";
+
+    const figuresIntro = (domainChart || classChart)
+      ? "<p class='subhead'>Overview</p>" +
+        (domainChart ? "<img src='" + domainChart + "' width='560'><div class='chart-cap'>Figure 1. Domain scores across visits in scope (%)</div>" : "") +
+        (classChart ? "<img src='" + classChart + "' width='560'><div class='chart-cap'>Figure 2. Distribution of visits by classification</div>" : "")
+      : "";
+
     const html =
       "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>" +
-      "<head><meta charset='utf-8'><title>Kwara ISS Report</title>" +
+      "<head><meta charset='utf-8'><title>Kwara ISS Field Monitoring Report</title>" +
       "<style>" +
-      "body{font-family:Calibri,Arial,sans-serif;color:#16241D;font-size:12px;line-height:1.5;}" +
-      "h2{color:#294B39;font-size:16px;margin-top:8px;margin-bottom:10px;border-bottom:1px solid #C7BFA3;padding-bottom:4px;}" +
-      "p{margin:0 0 10px;} ul{margin:0 0 12px;padding-left:22px;} li{margin-bottom:5px;}" +
-      "table{border-collapse:collapse;width:100%;margin:8px 0 16px;} td,th{border:1px solid #C7BFA3;padding:6px 8px;font-size:11.5px;text-align:left;vertical-align:top;} th{background:#E4ECE4;}" +
-      "img{margin:6px 0 12px;} .na{color:#8A9186;font-style:italic;} .subhead{font-weight:bold;margin:14px 0 6px;}" +
+      "@page{size:21.0cm 29.7cm;margin:2.4cm 2.3cm 2.3cm 2.3cm;}" +
+      "body{font-family:Calibri,'Segoe UI',Arial,sans-serif;color:#1C241F;font-size:11pt;line-height:1.5;}" +
+      "p{margin:0 0 10pt;text-align:justify;}" +
+      "h2{font-family:Calibri,Arial,sans-serif;font-size:13pt;font-weight:bold;text-transform:uppercase;letter-spacing:.3pt;color:#1F3D2E;border-bottom:1.5pt solid #1F3D2E;padding-bottom:5pt;margin:4pt 0 12pt;}" +
+      "ul,ol{margin:0 0 12pt;padding-left:24px;} li{margin-bottom:6pt;text-align:justify;}" +
+      "table{border-collapse:collapse;width:100%;margin:6pt 0 16pt;}" +
+      "td,th{border:0.75pt solid #B9C2B6;padding:6pt 9pt;font-size:10pt;text-align:left;vertical-align:top;}" +
+      "th{background:#1F3D2E;color:#FFFFFF;font-weight:bold;text-transform:uppercase;font-size:9pt;letter-spacing:.2pt;}" +
+      "tbody tr:nth-child(even) td, table:not(.toc-table) tr:nth-child(even) td{background:#F2F5F1;}" +
+      "table.toc-table td{border:none;padding:4pt 0;font-size:11pt;color:#1F3D2E;font-weight:600;}" +
+      "img{max-width:100%;margin:8pt 0 2pt;border:0.75pt solid #D8DED6;padding:6pt;background:#FEFEFC;}" +
+      ".chart-cap{font-size:9pt;color:#5A6459;font-style:italic;margin:0 0 14pt;text-align:center;}" +
+      ".na{color:#8A9186;font-style:italic;} .subhead{font-weight:bold;margin:14pt 0 6pt;font-size:11pt;color:#1F3D2E;}" +
       ".pagebreak{page-break-before:always;}" +
-      ".cover{text-align:center;padding-top:200px;}" +
-      ".cover-badge{font-size:11px;letter-spacing:2px;color:#5A6459;margin-bottom:50px;text-transform:uppercase;}" +
-      ".cover-title{font-size:30px;color:#16241D;margin:0 0 6px;font-weight:bold;}" +
-      ".cover-sub{font-size:18px;color:#294B39;margin-bottom:36px;}" +
-      ".cover-scope{font-size:15px;font-weight:bold;margin-bottom:24px;}" +
-      ".cover-meta{font-size:12px;color:#5A6459;line-height:1.9;}" +
+      ".cover{text-align:center;padding-top:150px;}" +
+      ".cover-line{width:120px;border-top:2pt solid #1F3D2E;margin:0 auto 26pt;}" +
+      ".cover-badge{font-size:10.5pt;letter-spacing:2.2pt;color:#5A6459;margin-bottom:42pt;text-transform:uppercase;font-weight:600;}" +
+      ".cover-title{font-family:Cambria,Georgia,serif;font-size:26pt;color:#1C241F;margin:0 0 8pt;font-weight:bold;}" +
+      ".cover-sub{font-size:15pt;color:#294B39;margin-bottom:40pt;letter-spacing:.4pt;}" +
+      ".cover-meta-box{display:inline-block;border:0.75pt solid #B9C2B6;padding:16pt 26pt;text-align:left;margin-top:10pt;}" +
+      ".cover-meta-box div{font-size:10.5pt;color:#3A443E;line-height:2;}" +
+      ".cover-meta-box b{color:#1C241F;}" +
       "</style></head><body>" +
-      cover + secExecSummary + secBackground + secObjectives + secMethodology + secKpi + secTrend + secGeo + secDataQuality + secSurveillance + secActivities + secFindings + secChallenges + secRecommendations + secActionPlan + secConclusion +
+      cover + secToc + secExecSummary + figuresIntro + secBackground + secObjectives + secMethodology + secKpi + secTrend + secGeo + secDataQuality + secSurveillance + secActivities + secFindings + secChallenges + secRecommendations + secActionPlan + secConclusion +
       "</body></html>";
 
     const blob = new Blob(["\ufeff", html], { type: "application/msword" });
