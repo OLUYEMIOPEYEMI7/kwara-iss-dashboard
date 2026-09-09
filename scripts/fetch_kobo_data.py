@@ -14,7 +14,7 @@ import urllib.error
 from datetime import datetime, timezone
 
 KOBO_HOST = "kf.kobotoolbox.org"
-ASSET_UID = "a3px58eSfDuyg3PLUdNBpR"
+ASSET_UID = "a8DMqEZtJcZ2Japx66KP4c"
 TOKEN = os.environ.get("KOBO_API_TOKEN", "").strip()
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +24,7 @@ META_OUT = os.path.join(DATA_DIR, "live_meta.json")
 
 # Group prefixes stripped from each flattened field name.
 GROUP_PREFIXES = [
-    "visit_profile/", "dom1/", "dom2/", "dom3/", "dom4/", "dom5/", "dom6/",
+    "visit_profile/", "dom1/", "dom2/", "dom3/", "dom4/", "dom4b/", "dom5/", "dom6/",
     "indicator_review/", "actions_group/",
 ]
 
