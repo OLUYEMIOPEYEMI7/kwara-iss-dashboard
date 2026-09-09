@@ -772,14 +772,8 @@
   // ---------------------------------------------------------
   // Data quality flags
   // ---------------------------------------------------------
-  function renderFlags(bundle) {
-    const { computed } = bundle;
+  function buildFlags(computed) {
     const { lookups } = state;
-    const list = document.getElementById("flagList");
-    if (!computed.length) {
-      list.innerHTML = '<div class="empty-state"><p>No visits in scope, so no flags to show.</p></div>';
-      return;
-    }
     const flags = [];
     computed.forEach((c) => {
       const facLabel = (lookups.facility[c.rec.facility] || {}).label || c.rec.facility;
@@ -790,6 +784,8 @@
           severity: "critical",
           text: c.m.criticalFlags.length + " critical red flag" + (c.m.criticalFlags.length > 1 ? "s" : "") + " — " + c.m.criticalFlags[0].label + (c.m.criticalFlags.length > 1 ? " and others" : ""),
           meta: facLabel + " · " + lgaLabel + " · " + fmtDate(date),
+          facility: facLabel,
+          lga: lgaLabel,
           date,
         });
       }
@@ -800,6 +796,8 @@
             severity: "warn",
             text: (f === "report_completeness" ? "Low report completeness" : "Low report timeliness") + " (" + v + "%)",
             meta: facLabel + " · " + lgaLabel + " · " + fmtDate(date),
+            facility: facLabel,
+            lga: lgaLabel,
             date,
           });
         }
@@ -812,6 +810,8 @@
               severity: "warn",
               text: "Unusual swing in " + t.label + " (" + prev + "% \u2192 " + cur + "%) — verify against source records",
               meta: facLabel + " · " + lgaLabel + " · " + fmtDate(date),
+              facility: facLabel,
+              lga: lgaLabel,
               date,
             });
           }
@@ -819,6 +819,17 @@
       });
     });
     flags.sort((a, b) => (a.date < b.date ? 1 : -1));
+    return flags;
+  }
+
+  function renderFlags(bundle) {
+    const { computed } = bundle;
+    const list = document.getElementById("flagList");
+    if (!computed.length) {
+      list.innerHTML = '<div class="empty-state"><p>No visits in scope, so no flags to show.</p></div>';
+      return;
+    }
+    const flags = buildFlags(computed);
     if (!flags.length) {
       list.innerHTML = '<div class="empty-state"><p>No data-quality flags in the current scope.</p></div>';
       return;
@@ -1201,25 +1212,125 @@
     return canvas.toDataURL("image/png");
   }
 
+  function tableHtml(headers, rows, emptyMsg) {
+    if (!rows.length) return "<table><tr>" + headers.map((h) => "<th>" + h + "</th>").join("") + "</tr><tr><td colspan='" + headers.length + "' class='na'>" + (emptyMsg || "No data available.") + "</td></tr></table>";
+    return (
+      "<table><tr>" + headers.map((h) => "<th>" + h + "</th>").join("") + "</tr>" +
+      rows.map((r) => "<tr>" + r.map((c) => "<td>" + c + "</td>").join("") + "</tr>").join("") +
+      "</table>"
+    );
+  }
+
+  function ulHtml(items, emptyMsg) {
+    if (!items.length) return "<p class='na'>" + (emptyMsg || "None recorded.") + "</p>";
+    return "<ul>" + items.map((i) => "<li>" + i + "</li>").join("") + "</ul>";
+  }
+
+  function globalWeakestItems(schema, computed, limit) {
+    const stats = [];
+    schema.domains.forEach((d) => {
+      d.items.forEach((item) => {
+        let num = 0, count = 0;
+        computed.forEach((c) => {
+          const v = c.rec[item.name];
+          if (v === undefined || v === null || v === "" || v === "na") return;
+          num += Number(v);
+          count += 1;
+        });
+        if (count) stats.push({ domain: d.label, label: item.label, pct: Math.round((100 * num) / (2 * count)), critical: item.critical });
+      });
+    });
+    return stats.sort((a, b) => a.pct - b.pct).slice(0, limit);
+  }
+
   function exportWord(bundle) {
     const { schema, lookups } = state;
     const { computed } = bundle;
     const scope = scopeLabel();
     const genDate = new Date().toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" });
+    const n = computed.length;
 
+    // ---- core computations ----
     const domainRows = schema.domains.map((d) => {
       const scores = computed.map((c) => c.m.domainScores[d.key]);
-      const avg = scores.length ? Math.round((scores.reduce((a, b) => a + b, 0) / scores.length) * 10) / 10 : 0;
-      const flags = computed.reduce((s, c) => s + c.m.criticalFlags.filter((f) => f.domain === d.key).length, 0);
-      return { label: d.label, avg, flags, color: avg >= 85 ? "#2E7D46" : avg >= 70 ? "#B07A1E" : "#A23B2D" };
+      const avg = scores.length ? round1(scores.reduce((a, b) => a + b, 0) / scores.length) : null;
+      const flagCount = computed.reduce((s, c) => s + c.m.criticalFlags.filter((f) => f.domain === d.key).length, 0);
+      return { key: d.key, label: d.label, weight: d.weight, avg, flagCount, color: avg === null ? "#8A9186" : avg >= 85 ? "#2E7D46" : avg >= 70 ? "#B07A1E" : "#A23B2D" };
     });
-    const domainChart = computed.length
-      ? chartImage(domainRows.map((r) => ({ label: r.label, value: r.avg, color: r.color })), { title: "Domain scores (%)", max: 100, suffix: "%" })
-      : null;
+    const scoredDomains = domainRows.filter((d) => d.avg !== null);
+    const sortedDomains = scoredDomains.slice().sort((a, b) => a.avg - b.avg);
+    const weakestDomain = sortedDomains[0] || null;
+    const strongestDomain = sortedDomains[sortedDomains.length - 1] || null;
 
     const classCounts = { GREEN: 0, AMBER: 0, RED: 0, CRITICAL: 0 };
     computed.forEach((c) => classCounts[c.m.classification]++);
-    const classChart = computed.length
+    const avgScore = n ? round1(computed.reduce((s, c) => s + c.m.overall, 0) / n) : null;
+
+    const tracerStats = schema.tracers
+      .map((t) => {
+        const curVals = computed.map((c) => c.rec[t.field + "_current"]).filter((v) => v !== undefined && v !== null && v !== "");
+        const prevVals = computed.map((c) => c.rec[t.field + "_previous"]).filter((v) => v !== undefined && v !== null && v !== "");
+        const avgCur = curVals.length ? round1(curVals.reduce((a, b) => a + Number(b), 0) / curVals.length) : null;
+        const avgPrev = prevVals.length ? round1(prevVals.reduce((a, b) => a + Number(b), 0) / prevVals.length) : null;
+        return Object.assign({}, t, { avgCur, avgPrev, trend: trendGood(t.direction, avgCur, avgPrev) });
+      })
+      .filter((t) => t.avgCur !== null);
+    const improvedCount = tracerStats.filter((t) => t.trend === "up").length;
+    const declinedCount = tracerStats.filter((t) => t.trend === "down").length;
+    const pctTracers = tracerStats.filter((t) => t.unit === "%");
+
+    const lgaMap = {};
+    computed.forEach((c) => {
+      const code = c.rec.lga;
+      lgaMap[code] = lgaMap[code] || { visits: 0, scoreSum: 0, classCounts: { GREEN: 0, AMBER: 0, RED: 0, CRITICAL: 0 } };
+      lgaMap[code].visits++;
+      lgaMap[code].scoreSum += c.m.overall;
+      lgaMap[code].classCounts[c.m.classification]++;
+    });
+    const lgaRows = Object.keys(lgaMap)
+      .map((code) => ({
+        label: lookups.lga[code] || code,
+        visits: lgaMap[code].visits,
+        avg: round1(lgaMap[code].scoreSum / lgaMap[code].visits),
+        cc: lgaMap[code].classCounts,
+      }))
+      .sort((a, b) => a.avg - b.avg);
+
+    const facilityRows = buildFacilityRows(computed).sort((a, b) => a.score - b.score);
+    const flags = buildFlags(computed);
+    const criticalFlags = flags.filter((f) => f.severity === "critical");
+    const warnFlags = flags.filter((f) => f.severity === "warn");
+    const flaggedFacilities = new Set(criticalFlags.map((f) => f.facility)).size;
+
+    const actions = collectActions(computed);
+    const overdue = actions.filter(isOverdue).sort((a, b) => (a.due_date < b.due_date ? -1 : 1));
+    const openActions = actions.filter((a) => a.action_status !== "closed");
+    const closedActions = actions.filter((a) => a.action_status === "closed");
+    const immediateActions = actions.filter((a) => a.immediate_action && String(a.immediate_action).trim());
+
+    const visitTypeCounts = {};
+    computed.forEach((c) => {
+      const vt = c.rec.visit_type || "unspecified";
+      visitTypeCounts[vt] = (visitTypeCounts[vt] || 0) + 1;
+    });
+    const visitTypeLabel = (code) => {
+      const found = schema.visit_type.find((v) => v.code === code);
+      return found ? found.label : code;
+    };
+
+    const reportCompleteness = tracerStats.find((t) => t.field === "report_completeness");
+    const reportTimeliness = tracerStats.find((t) => t.field === "report_timeliness");
+    const dataQualityDomain = domainRows.find((d) => d.key === "dom6");
+    const worstItems = globalWeakestItems(schema, computed, 5);
+
+    const visitedFacilities = new Set(computed.map((c) => c.rec.facility));
+    const facScope = facilitiesInScope();
+
+    // ---- charts ----
+    const domainChart = scoredDomains.length
+      ? chartImage(domainRows.filter((d) => d.avg !== null).map((r) => ({ label: r.label, value: r.avg, color: r.color })), { title: "Domain scores (%)", max: 100, suffix: "%" })
+      : null;
+    const classChart = n
       ? chartImage(
           [
             { label: "GREEN", value: classCounts.GREEN, color: "#2E7D46" },
@@ -1227,61 +1338,195 @@
             { label: "RED", value: classCounts.RED, color: "#A23B2D" },
             { label: "CRITICAL", value: classCounts.CRITICAL, color: "#7B1F22" },
           ],
-          { title: "Visits by classification", max: Math.max(1, computed.length), suffix: "" }
+          { title: "Visits by classification", max: Math.max(1, n), suffix: "" }
         )
       : null;
+    const lgaChart = lgaRows.length
+      ? chartImage(lgaRows.map((r) => ({ label: r.label, value: r.avg, color: r.avg >= 85 ? "#2E7D46" : r.avg >= 70 ? "#B07A1E" : "#A23B2D" })), { title: "Average overall score by LGA (%)", max: 100, suffix: "%", rowH: 26 })
+      : null;
+    const tracerChart = pctTracers.length
+      ? chartImage(pctTracers.map((t) => ({ label: t.label, value: t.avgCur, color: "#3C6B52" })), { title: "Tracer indicators — current period (%)", max: 100, suffix: "%", rowH: 26 })
+      : null;
 
-    const avgScore = computed.length ? Math.round((computed.reduce((s, c) => s + c.m.overall, 0) / computed.length) * 10) / 10 : "—";
+    // ---- recommendations ----
+    const recommendations = [];
+    domainRows.forEach((d) => {
+      if (d.avg === null) return;
+      if (d.avg < 70) recommendations.push("Prioritize targeted mentorship and refresher training in <b>" + d.label + "</b> (currently averaging " + d.avg + "%), the area furthest from target this reporting period.");
+      else if (d.avg < 85) recommendations.push("Continue reinforcing <b>" + d.label + "</b> practices (currently " + d.avg + "%) to move facilities from AMBER to GREEN performance.");
+    });
+    if (criticalFlags.length) recommendations.push("Immediately investigate and resolve the " + criticalFlags.length + " critical safety red flag" + (criticalFlags.length > 1 ? "s" : "") + " identified, prioritizing maternal/newborn emergency readiness, infection prevention and control, and cold-chain integrity.");
+    if (overdue.length) recommendations.push("Escalate the " + overdue.length + " overdue corrective action" + (overdue.length > 1 ? "s" : "") + " to the responsible LGA or State focal person and set a firm closure timeline.");
+    if ((reportCompleteness && reportCompleteness.avgCur < 80) || (reportTimeliness && reportTimeliness.avgCur < 80)) recommendations.push("Strengthen routine data reporting: reinforce facility-level completeness and timeliness of monthly summaries submitted to the routine health information system.");
+    if (!recommendations.length && n) recommendations.push("Sustain current performance levels through continued quarterly supportive supervision and peer-to-peer learning between higher- and lower-performing facilities.");
+    if (n) recommendations.push("Maintain a consistent supportive supervision schedule with structured follow-up on every action point raised during this cycle.");
 
-    const tracerRows = schema.tracers
-      .map((t) => {
-        const curVals = computed.map((c) => c.rec[t.field + "_current"]).filter((v) => v !== undefined && v !== null && v !== "");
-        const prevVals = computed.map((c) => c.rec[t.field + "_previous"]).filter((v) => v !== undefined && v !== null && v !== "");
-        if (!curVals.length) return null;
-        const avgCur = round1(curVals.reduce((a, b) => a + Number(b), 0) / curVals.length);
-        const avgPrev = prevVals.length ? round1(prevVals.reduce((a, b) => a + Number(b), 0) / prevVals.length) : null;
-        return "<tr><td>" + t.label + "</td><td>" + avgCur + (t.unit === "%" ? "%" : "") + "</td><td>" + (avgPrev === null ? "—" : avgPrev + (t.unit === "%" ? "%" : "")) + "</td></tr>";
-      })
-      .filter(Boolean)
-      .join("");
+    // ---- narrative fragments ----
+    const execSummary = n
+      ? "During the period covered by this report, <b>" + n + "</b> supportive supervision visit" + (n === 1 ? " was" : "s were") + " conducted across <b>" + scope + "</b>, covering " + visitedFacilities.size + " of " + facScope.length + " facilities in scope. The average overall facility performance score was <b>" + avgScore + "%</b>, with " + classCounts.GREEN + " visit(s) classified GREEN, " + classCounts.AMBER + " AMBER, " + classCounts.RED + " RED and " + classCounts.CRITICAL + " CRITICAL. " + criticalFlags.length + " critical safety red flag(s) were recorded across " + flaggedFacilities + " facilit" + (flaggedFacilities === 1 ? "y" : "ies") + ", and " + openActions.length + " corrective action(s) remain open, of which " + overdue.length + " " + (overdue.length === 1 ? "is" : "are") + " overdue."
+      : "No supervision visits have yet been recorded for <b>" + scope + "</b> in this reporting period. This report reflects the standard ISS reporting structure and will populate automatically with a full analysis once field teams begin submitting visits through the KoboToolbox digital checklist.";
 
-    const facRows = buildFacilityRows(computed)
-      .sort((a, b) => a.score - b.score)
-      .map((r) => "<tr><td>" + r.label + "</td><td>" + r.lgaLabel + "</td><td>" + r.visits + "</td><td>" + r.score + "%</td><td>" + r.classification + "</td></tr>")
-      .join("");
+    const trendNarrative = tracerStats.length
+      ? improvedCount + " of " + tracerStats.length + " tracked tracer indicator(s) improved relative to the previous reporting period, " + declinedCount + " declined, and " + (tracerStats.length - improvedCount - declinedCount) + " held broadly steady."
+      : "No comparable current/previous indicator values were recorded in this scope.";
 
-    const actions = collectActions(computed);
-    const overdue = actions.filter(isOverdue);
-    const actionRows = overdue
-      .map((a) => "<tr><td>" + (a.action_gap || "—") + "</td><td>" + ((lookups.facility[a.facility] || {}).label || a.facility) + "</td><td>" + fmtDate(a.due_date) + "</td></tr>")
-      .join("");
+    const surveillanceNarrative = reportCompleteness || reportTimeliness
+      ? "Average routine report completeness across visited facilities was " + (reportCompleteness ? reportCompleteness.avgCur + "%" : "not recorded") + ", and average reporting timeliness was " + (reportTimeliness ? reportTimeliness.avgCur + "%" : "not recorded") + ". The Data Quality, IPC & Referral domain — which also covers register accuracy, source-verification and referral systems — averaged " + (dataQualityDomain && dataQualityDomain.avg !== null ? dataQualityDomain.avg + "%" : "no data") + " across visited facilities."
+      : "No routine reporting indicator values were recorded in this scope.";
+
+    const conclusion = n
+      ? "This reporting cycle covering <b>" + scope + "</b> recorded " + n + " supervision visit(s) with an average overall score of " + avgScore + "%. " +
+        (classCounts.CRITICAL > 0 ? "The presence of " + classCounts.CRITICAL + " CRITICAL classification(s) underscores the need for urgent follow-up on safety-related gaps. " : "") +
+        "Sustained supportive supervision, prompt closure of corrective actions, and continued investment in " + (weakestDomain ? weakestDomain.label : "the weakest-performing thematic areas") + " will be key to improving service readiness and quality of care across supervised facilities. The Kwara State Primary Health Care Development Agency will continue to monitor these indicators through routine ISS visits and will review progress against this action plan at the next supervision cycle."
+      : "No supervision data are yet available for this reporting period. This report structure will auto-populate with a full analysis once facility visits are submitted through the digital ISS checklist.";
+
+    // ---- key findings / challenges ----
+    const keyFindings = [];
+    if (weakestDomain) keyFindings.push("The weakest-performing thematic domain was <b>" + weakestDomain.label + "</b>, averaging " + weakestDomain.avg + "%.");
+    if (strongestDomain) keyFindings.push("The strongest-performing thematic domain was <b>" + strongestDomain.label + "</b>, averaging " + strongestDomain.avg + "%.");
+    if (lgaRows.length) keyFindings.push("<b>" + lgaRows[0].label + "</b> LGA recorded the lowest average score (" + lgaRows[0].avg + "%), while <b>" + lgaRows[lgaRows.length - 1].label + "</b> LGA recorded the highest (" + lgaRows[lgaRows.length - 1].avg + "%).");
+    if (n) keyFindings.push(classCounts.CRITICAL + " of " + n + " visits (" + pct(classCounts.CRITICAL, n) + ") were classified CRITICAL due to at least one critical safety red flag.");
+    if (immediateActions.length) keyFindings.push(immediateActions.length + " corrective action(s) were resolved on the spot during the supervision visit itself.");
+
+    const challenges = [];
+    worstItems.forEach((it) => challenges.push("<b>" + it.label + "</b> (" + it.domain + ") — met in only " + it.pct + "% of applicable checks" + (it.critical ? ", a critical safety item" : "") + "."));
+    if (overdue.length) challenges.push(overdue.length + " corrective action(s) from this and prior visits remain overdue.");
+    if (warnFlags.length) challenges.push(warnFlags.length + " reporting-quality flag(s) were raised (low completeness/timeliness or unusual indicator swings).");
+    if (!challenges.length) challenges.push("No significant gaps were identified in the current scope.");
+
+    // ---- assembled sections ----
+    const pageBreak = "<div class='pagebreak'></div>";
+
+    const cover =
+      "<div class='cover'>" +
+      "<div class='cover-badge'>KWARA STATE PRIMARY HEALTH CARE DEVELOPMENT AGENCY</div>" +
+      "<h1 class='cover-title'>Integrated Supportive Supervision</h1>" +
+      "<div class='cover-sub'>Field Monitoring Report</div>" +
+      "<div class='cover-scope'>" + scope + "</div>" +
+      "<div class='cover-meta'>Report generated: " + genDate + "<br>Supervision visits in scope: " + n + "<br>Reporting basis: KoboToolbox digital supportive supervision checklist</div>" +
+      "</div>" + pageBreak;
+
+    const secExecSummary =
+      "<h2>1. Executive Summary</h2><p>" + execSummary + "</p>" +
+      tableHtml(
+        ["Metric", "Value"],
+        [
+          ["Supervision visits", String(n)],
+          ["Facilities covered", visitedFacilities.size + " of " + facScope.length],
+          ["Average overall score", avgScore === null ? "—" : avgScore + "%"],
+          ["GREEN / AMBER / RED / CRITICAL", classCounts.GREEN + " / " + classCounts.AMBER + " / " + classCounts.RED + " / " + classCounts.CRITICAL],
+          ["Open corrective actions", openActions.length + " (" + overdue.length + " overdue)"],
+        ]
+      );
+
+    const secBackground =
+      pageBreak + "<h2>2. Background</h2><p>The Kwara State Primary Health Care Development Agency (PHCDA) conducts Integrated Supportive Supervision (ISS) visits to primary health care facilities across the State's 16 Local Government Areas. The ISS tool consolidates supervision of six thematic areas — Facility Readiness &amp; Governance, Routine Immunization, Nutrition, Maternal &amp; Newborn Health, Child Health &amp; Service Integration, and Data Quality, IPC &amp; Referral — into a single digital checklist administered through KoboToolbox. This integrated approach reduces duplication of supervisory visits, strengthens accountability at facility level, and supports real-time, evidence-based decision-making by State and LGA programme managers.</p>";
+
+    const secObjectives =
+      "<h2>3. Objectives</h2>" +
+      ulHtml([
+        "Assess facility compliance with national standards across the six thematic supervision domains.",
+        "Identify and document programmatic, clinical and data-quality gaps at the point of care.",
+        "Provide on-the-spot coaching and corrective guidance to facility staff.",
+        "Track the status of previously agreed corrective actions through to closure.",
+        "Generate reliable, timely evidence to guide State and LGA-level programme decisions.",
+      ]);
+
+    const secMethodology =
+      "<h2>4. Methodology</h2><p>Data for this report were collected using a standardized digital checklist administered via KoboToolbox by trained State and LGA supervisors during facility visits. Each of the 130 checklist items is scored 2 (fully compliant), 1 (partially compliant), 0 (non-compliant) or Not Applicable. Domain scores are calculated as the percentage of applicable points achieved, and an overall facility score is derived as a weighted average across the six domains (Facility Readiness &amp; Governance 10%, Routine Immunization 25%, Nutrition 20%, Maternal &amp; Newborn Health 25%, Child Health &amp; Service Integration 10%, Data Quality/IPC/Referral 10%). Forty-three items flagged as critical safety or programmatic indicators automatically classify a visit as CRITICAL if scored non-compliant, overriding the numeric score. In the absence of a critical flag, facilities are classified GREEN (\u226585%), AMBER (70\u201384%) or RED (&lt;70%). This report reflects data for <b>" + scope + "</b>, covering " + n + " visit(s) as of " + genDate + ".</p>";
+
+    const secKpi =
+      pageBreak + "<h2>5. Key Performance Indicators</h2><p>The table below compares each tracked programme indicator against the prior reporting period.</p>" +
+      (tracerChart ? "<img src='" + tracerChart + "' width='560'>" : "") +
+      tableHtml(
+        ["Indicator", "Current period", "Previous period", "Direction"],
+        tracerStats.map((t) => [t.label, t.avgCur + (t.unit === "%" ? "%" : ""), t.avgPrev === null ? "—" : t.avgPrev + (t.unit === "%" ? "%" : ""), t.trend === "up" ? "▲ improving" : t.trend === "down" ? "▼ declining" : "▬ steady"]),
+        "No tracer indicator values recorded in this scope."
+      );
+
+    const secTrend =
+      "<h2>6. Trend Analysis</h2><p>" + trendNarrative + "</p>";
+
+    const secGeo =
+      pageBreak + "<h2>7. Geographic / LGA Performance</h2><p>Average overall score by Local Government Area, ranked weakest to strongest.</p>" +
+      (lgaChart ? "<img src='" + lgaChart + "' width='560'>" : "") +
+      tableHtml(
+        ["LGA", "Visits", "Average score", "GREEN", "AMBER", "RED", "CRITICAL"],
+        lgaRows.map((r) => [r.label, String(r.visits), r.avg + "%", r.cc.GREEN, r.cc.AMBER, r.cc.RED, r.cc.CRITICAL]),
+        "No LGA-level data recorded in this scope."
+      );
+
+    const secDataQuality =
+      pageBreak + "<h2>8. Data Quality</h2><p>" + criticalFlags.length + " critical red flag(s) and " + warnFlags.length + " reporting-quality flag(s) were identified across visits in scope.</p>" +
+      tableHtml(
+        ["Severity", "Finding", "Facility", "LGA", "Date"],
+        flags.slice(0, 15).map((f) => [f.severity === "critical" ? "Critical" : "Warning", f.text, f.facility, f.lga, fmtDate(f.date)]),
+        "No data-quality flags in this scope."
+      );
+
+    const secSurveillance =
+      "<h2>9. Surveillance &amp; Routine Reporting Performance</h2><p>" + surveillanceNarrative + "</p>" +
+      tableHtml(
+        ["Indicator", "Current period", "Previous period"],
+        [
+          ["Routine report completeness", reportCompleteness ? reportCompleteness.avgCur + "%" : "—", reportCompleteness && reportCompleteness.avgPrev !== null ? reportCompleteness.avgPrev + "%" : "—"],
+          ["Routine report timeliness", reportTimeliness ? reportTimeliness.avgCur + "%" : "—", reportTimeliness && reportTimeliness.avgPrev !== null ? reportTimeliness.avgPrev + "%" : "—"],
+          ["Data Quality, IPC & Referral domain", dataQualityDomain && dataQualityDomain.avg !== null ? dataQualityDomain.avg + "%" : "—", "—"],
+        ]
+      );
+
+    const secActivities =
+      pageBreak + "<h2>10. Activities Implemented</h2><p>Supervision activity in this scope, by visit type:</p>" +
+      tableHtml(
+        ["Visit type", "Count"],
+        Object.keys(visitTypeCounts).map((k) => [visitTypeLabel(k), String(visitTypeCounts[k])]),
+        "No visits recorded in this scope."
+      ) +
+      "<p class='subhead'>Corrective actions completed on the spot during the visit</p>" +
+      ulHtml(immediateActions.slice(0, 10).map((a) => a.immediate_action + " <span class='na'>(" + ((lookups.facility[a.facility] || {}).label || a.facility) + ")</span>"), "No on-the-spot corrections recorded in this scope.");
+
+    const secFindings =
+      pageBreak + "<h2>11. Key Findings</h2>" + ulHtml(keyFindings, "No findings available — no visits recorded in this scope.");
+
+    const secChallenges =
+      "<h2>12. Challenges</h2><p class='subhead'>Weakest checklist items across all visited facilities</p>" + ulHtml(challenges);
+
+    const secRecommendations =
+      pageBreak + "<h2>13. Recommendations</h2>" + ulHtml(recommendations, "No recommendations — no visits recorded in this scope.");
+
+    const secActionPlan =
+      "<h2>14. Action Plan</h2><p>Open corrective actions from visits in this scope, oldest due date first.</p>" +
+      tableHtml(
+        ["Gap", "Facility", "Responsible", "Due date", "Status"],
+        openActions
+          .slice()
+          .sort((a, b) => (a.due_date || "") < (b.due_date || "") ? -1 : 1)
+          .slice(0, 25)
+          .map((a) => [a.action_gap || "—", (lookups.facility[a.facility] || {}).label || a.facility, (a.responsible_person || "—") + (a.responsible_level ? " (" + a.responsible_level + ")" : ""), fmtDate(a.due_date), a.action_status]),
+        "No open corrective actions in this scope."
+      );
+
+    const secConclusion =
+      pageBreak + "<h2>15. Conclusion</h2><p>" + conclusion + "</p>";
 
     const html =
       "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>" +
       "<head><meta charset='utf-8'><title>Kwara ISS Report</title>" +
-      "<style>body{font-family:Calibri,Arial,sans-serif;color:#16241D;} h1{color:#16241D;font-size:22px;margin-bottom:2px;} h2{color:#294B39;font-size:16px;margin-top:26px;border-bottom:1px solid #C7BFA3;padding-bottom:4px;} " +
-      "p.meta{color:#5A6459;font-size:12px;margin-top:0;} table{border-collapse:collapse;width:100%;margin-top:8px;} td,th{border:1px solid #C7BFA3;padding:6px 8px;font-size:12px;text-align:left;} th{background:#E4ECE4;} img{margin-top:8px;}</style>" +
-      "</head><body>" +
-      "<h1>Kwara State Integrated Supportive Supervision</h1>" +
-      "<p class='meta'>Field monitoring report — " + scope + " &middot; generated " + genDate + " &middot; " + computed.length + " supervision visit" + (computed.length === 1 ? "" : "s") + " in scope</p>" +
-      "<h2>Summary</h2>" +
-      "<table><tr><th>Supervision visits</th><td>" + computed.length + "</td></tr>" +
-      "<tr><th>Average overall score</th><td>" + avgScore + (computed.length ? "%" : "") + "</td></tr>" +
-      "<tr><th>GREEN / AMBER / RED / CRITICAL</th><td>" + classCounts.GREEN + " / " + classCounts.AMBER + " / " + classCounts.RED + " / " + classCounts.CRITICAL + "</td></tr>" +
-      "<tr><th>Open corrective actions</th><td>" + actions.filter((a) => a.action_status !== "closed").length + " (" + overdue.length + " overdue)</td></tr></table>" +
-      "<h2>Thematic performance</h2>" +
-      (domainChart ? "<img src='" + domainChart + "' width='560'>" : "<p>No scored visits in scope.</p>") +
-      "<table><tr><th>Domain</th><th>Average score</th><th>Critical red flags</th></tr>" +
-      domainRows.map((r) => "<tr><td>" + r.label + "</td><td>" + r.avg + "%</td><td>" + r.flags + "</td></tr>").join("") +
-      "</table>" +
-      "<h2>Visit classification</h2>" +
-      (classChart ? "<img src='" + classChart + "' width='560'>" : "") +
-      "<h2>Tracer indicators</h2>" +
-      "<table><tr><th>Indicator</th><th>Current</th><th>Previous</th></tr>" + (tracerRows || "<tr><td colspan='3'>No recorded values in scope.</td></tr>") + "</table>" +
-      "<h2>Facility register (weakest first)</h2>" +
-      "<table><tr><th>Facility</th><th>LGA</th><th>Visits</th><th>Score</th><th>Classification</th></tr>" + (facRows || "<tr><td colspan='5'>No facilities in scope.</td></tr>") + "</table>" +
-      "<h2>Overdue corrective actions</h2>" +
-      "<table><tr><th>Gap</th><th>Facility</th><th>Due</th></tr>" + (actionRows || "<tr><td colspan='3'>None.</td></tr>") + "</table>" +
+      "<style>" +
+      "body{font-family:Calibri,Arial,sans-serif;color:#16241D;font-size:12px;line-height:1.5;}" +
+      "h2{color:#294B39;font-size:16px;margin-top:8px;margin-bottom:10px;border-bottom:1px solid #C7BFA3;padding-bottom:4px;}" +
+      "p{margin:0 0 10px;} ul{margin:0 0 12px;padding-left:22px;} li{margin-bottom:5px;}" +
+      "table{border-collapse:collapse;width:100%;margin:8px 0 16px;} td,th{border:1px solid #C7BFA3;padding:6px 8px;font-size:11.5px;text-align:left;vertical-align:top;} th{background:#E4ECE4;}" +
+      "img{margin:6px 0 12px;} .na{color:#8A9186;font-style:italic;} .subhead{font-weight:bold;margin:14px 0 6px;}" +
+      ".pagebreak{page-break-before:always;}" +
+      ".cover{text-align:center;padding-top:200px;}" +
+      ".cover-badge{font-size:11px;letter-spacing:2px;color:#5A6459;margin-bottom:50px;text-transform:uppercase;}" +
+      ".cover-title{font-size:30px;color:#16241D;margin:0 0 6px;font-weight:bold;}" +
+      ".cover-sub{font-size:18px;color:#294B39;margin-bottom:36px;}" +
+      ".cover-scope{font-size:15px;font-weight:bold;margin-bottom:24px;}" +
+      ".cover-meta{font-size:12px;color:#5A6459;line-height:1.9;}" +
+      "</style></head><body>" +
+      cover + secExecSummary + secBackground + secObjectives + secMethodology + secKpi + secTrend + secGeo + secDataQuality + secSurveillance + secActivities + secFindings + secChallenges + secRecommendations + secActionPlan + secConclusion +
       "</body></html>";
 
     const blob = new Blob(["\ufeff", html], { type: "application/msword" });
