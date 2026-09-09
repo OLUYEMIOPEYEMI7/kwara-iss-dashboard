@@ -22,13 +22,13 @@
   const state = {
     schema: null,
     lookups: null,
-    dataMode: "live",
-    records: { live: [], sample: [] },
-    meta: { live: null, sample: null },
+    records: [],
+    meta: null,
     filters: { lga: "", ward: "", facility: "", visitType: "", period: "all" },
     openDomain: null,
     openKpi: null,
     sort: { key: "score", dir: "asc" },
+    registerSearch: "",
   };
 
   // ---------------------------------------------------------
@@ -46,17 +46,14 @@
   }
 
   async function init() {
-    const [schema, liveSubs, liveMeta, sampleSubs] = await Promise.all([
+    const [schema, liveSubs, liveMeta] = await Promise.all([
       loadJSON("assets/schema.json", null),
       loadJSON("data/live_submissions.json", []),
       loadJSON("data/live_meta.json", null),
-      loadJSON("data/sample_submissions.json", []),
     ]);
     state.schema = schema;
-    state.records.live = liveSubs || [];
-    state.records.sample = sampleSubs || [];
-    state.meta.live = liveMeta;
-    state.meta.sample = { fetched_at: new Date().toISOString(), count: (sampleSubs || []).length, sample: true };
+    state.records = liveSubs || [];
+    state.meta = liveMeta;
     state.lookups = buildLookups(schema);
 
     populateStaticSelects();
@@ -112,7 +109,7 @@
   // Filtering
   // ---------------------------------------------------------
   function currentRecords() {
-    return state.records[state.dataMode] || [];
+    return state.records || [];
   }
 
   function facilitiesInScope() {
@@ -251,8 +248,13 @@
       state.filters.period = e.target.value;
       render();
     });
-    document.getElementById("btnLive").addEventListener("click", () => setDataMode("live"));
-    document.getElementById("btnSample").addEventListener("click", () => setDataMode("sample"));
+    document.getElementById("registerSearch").addEventListener("input", (e) => {
+      state.registerSearch = e.target.value || "";
+      renderRegister(getBundle());
+    });
+
+    document.getElementById("btnExportExcel").addEventListener("click", () => exportExcel(getBundle()));
+    document.getElementById("btnExportWord").addEventListener("click", () => exportWord(getBundle()));
 
     document.getElementById("drawerClose").addEventListener("click", closeDrawer);
     document.getElementById("drawerOverlay").addEventListener("click", closeDrawer);
@@ -268,15 +270,6 @@
         renderRegister(getBundle());
       });
     });
-  }
-
-  function setDataMode(mode) {
-    state.dataMode = mode;
-    document.getElementById("btnLive").classList.toggle("is-on", mode === "live");
-    document.getElementById("btnSample").classList.toggle("is-on", mode === "sample");
-    state.openDomain = null;
-    state.openKpi = null;
-    render();
   }
 
   // ---------------------------------------------------------
@@ -315,12 +308,8 @@
   }
 
   function renderUpdatedNote() {
-    const meta = state.meta[state.dataMode];
+    const meta = state.meta;
     const el = document.getElementById("updatedNote");
-    if (state.dataMode === "sample") {
-      el.textContent = "Sample preview data — for demonstration only";
-      return;
-    }
     if (!meta || !meta.fetched_at) {
       el.textContent = "Awaiting first data refresh";
       return;
@@ -953,11 +942,17 @@
   }
 
   function renderRegister(bundle) {
-    const rows = buildFacilityRows(bundle.computed);
+    let rows = buildFacilityRows(bundle.computed);
     const tbody = document.getElementById("registerBody");
-    if (!rows.length) {
+    if (!bundle.computed.length) {
       tbody.innerHTML =
         '<tr><td colspan="7"><div class="empty-state"><h4>No supervision visits yet</h4><p>Once field teams start submitting visits through the KoboToolbox form, every supervised facility will appear here with its latest score and classification.</p></div></td></tr>';
+      return;
+    }
+    const q = (state.registerSearch || "").trim().toLowerCase();
+    if (q) rows = rows.filter((r) => r.label.toLowerCase().includes(q));
+    if (!rows.length) {
+      tbody.innerHTML = '<tr><td colspan="7"><div class="empty-state"><p>No facilities match "' + q + '".</p></div></td></tr>';
       return;
     }
     const dir = state.sort.dir === "asc" ? 1 : -1;
@@ -1092,6 +1087,212 @@
         render();
       });
     });
+  }
+
+  // ---------------------------------------------------------
+  // Export — Excel (raw submissions) and Word (summary report)
+  // ---------------------------------------------------------
+  function exportFileNameBase() {
+    const d = new Date();
+    const stamp = d.toISOString().slice(0, 10);
+    const scope = scopeLabel().replace(/[^a-z0-9]+/gi, "_").replace(/^_+|_+$/g, "");
+    return "kwara_iss_" + scope + "_" + stamp;
+  }
+
+  function exportExcel(bundle) {
+    if (!window.XLSX) {
+      alert("Export library did not load — check your internet connection and try again.");
+      return;
+    }
+    const { schema, lookups } = state;
+    const qFields = schema.domains.flatMap((d) => d.items.map((it) => it.name));
+    const tracerFields = schema.tracers.flatMap((t) => [t.field + "_current", t.field + "_previous"]);
+    const header = [
+      "visit_id", "date", "lga", "ward", "facility", "facility_type", "visit_type",
+      "supervisor_name", "supervisor_level", "overall_score", "classification", "critical_red_flags",
+    ].concat(qFields, tracerFields, ["report_completeness_current", "report_completeness_previous", "report_timeliness_current", "report_timeliness_previous"]);
+
+    const rows = bundle.computed.map((c) => {
+      const r = c.rec;
+      const facInfo = lookups.facility[r.facility] || {};
+      const wardInfo = lookups.ward[facInfo.ward] || {};
+      const base = [
+        r._id || r._uuid || "",
+        visitDate(r) || "",
+        lookups.lga[r.lga] || r.lga || "",
+        wardInfo.label || r.ward || "",
+        facInfo.label || r.facility || "",
+        r.facility_type || "",
+        r.visit_type || "",
+        r.supervisor_name || "",
+        r.supervisor_level || "",
+        c.m.overall,
+        c.m.classification,
+        c.m.criticalFlags.length,
+      ];
+      const qVals = qFields.map((f) => (r[f] === undefined ? "" : r[f]));
+      const tVals = tracerFields.map((f) => (r[f] === undefined ? "" : r[f]));
+      const repVals = [r.report_completeness_current, r.report_completeness_previous, r.report_timeliness_current, r.report_timeliness_previous].map((v) => (v === undefined ? "" : v));
+      return base.concat(qVals, tVals, repVals);
+    });
+
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.aoa_to_sheet([header].concat(rows));
+    XLSX.utils.book_append_sheet(wb, ws, "Submissions");
+
+    const actionHeader = ["facility", "lga", "visit_date", "gap", "further_action", "responsible_level", "responsible_person", "due_date", "status"];
+    const actionRows = [];
+    bundle.computed.forEach((c) => {
+      const facInfo = lookups.facility[c.rec.facility] || {};
+      (c.rec.actions || []).forEach((a) => {
+        actionRows.push([
+          facInfo.label || c.rec.facility || "",
+          lookups.lga[c.rec.lga] || c.rec.lga || "",
+          visitDate(c.rec) || "",
+          a.action_gap || "",
+          a.further_action || "",
+          a.responsible_level || "",
+          a.responsible_person || "",
+          a.due_date || "",
+          a.action_status || "",
+        ]);
+      });
+    });
+    const wsActions = XLSX.utils.aoa_to_sheet([actionHeader].concat(actionRows));
+    XLSX.utils.book_append_sheet(wb, wsActions, "Corrective actions");
+
+    XLSX.writeFile(wb, exportFileNameBase() + ".xlsx");
+  }
+
+  // Minimal canvas bar chart, returns a PNG data URL.
+  function chartImage(items, opts) {
+    opts = opts || {};
+    const w = opts.width || 640;
+    const rowH = opts.rowH || 30;
+    const padL = opts.padL || 230;
+    const padR = 70;
+    const padTop = 30;
+    const h = padTop + items.length * rowH + 20;
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#FBFAF4";
+    ctx.fillRect(0, 0, w, h);
+    ctx.font = "600 14px Arial";
+    ctx.fillStyle = "#16241D";
+    ctx.fillText(opts.title || "", 12, 20);
+    const max = opts.max || 100;
+    const barMaxW = w - padL - padR;
+    items.forEach((item, i) => {
+      const y = padTop + i * rowH;
+      ctx.font = "12px Arial";
+      ctx.fillStyle = "#16241D";
+      ctx.textAlign = "right";
+      ctx.fillText(item.label, padL - 10, y + rowH / 2 + 4);
+      ctx.textAlign = "left";
+      const barW = Math.max(2, (item.value / max) * barMaxW);
+      ctx.fillStyle = item.color || "#3C6B52";
+      ctx.fillRect(padL, y + 5, barW, rowH - 12);
+      ctx.fillStyle = "#16241D";
+      ctx.font = "600 12px Arial";
+      ctx.fillText(String(item.value) + (opts.suffix || ""), padL + barW + 8, y + rowH / 2 + 4);
+    });
+    return canvas.toDataURL("image/png");
+  }
+
+  function exportWord(bundle) {
+    const { schema, lookups } = state;
+    const { computed } = bundle;
+    const scope = scopeLabel();
+    const genDate = new Date().toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" });
+
+    const domainRows = schema.domains.map((d) => {
+      const scores = computed.map((c) => c.m.domainScores[d.key]);
+      const avg = scores.length ? Math.round((scores.reduce((a, b) => a + b, 0) / scores.length) * 10) / 10 : 0;
+      const flags = computed.reduce((s, c) => s + c.m.criticalFlags.filter((f) => f.domain === d.key).length, 0);
+      return { label: d.label, avg, flags, color: avg >= 85 ? "#2E7D46" : avg >= 70 ? "#B07A1E" : "#A23B2D" };
+    });
+    const domainChart = computed.length
+      ? chartImage(domainRows.map((r) => ({ label: r.label, value: r.avg, color: r.color })), { title: "Domain scores (%)", max: 100, suffix: "%" })
+      : null;
+
+    const classCounts = { GREEN: 0, AMBER: 0, RED: 0, CRITICAL: 0 };
+    computed.forEach((c) => classCounts[c.m.classification]++);
+    const classChart = computed.length
+      ? chartImage(
+          [
+            { label: "GREEN", value: classCounts.GREEN, color: "#2E7D46" },
+            { label: "AMBER", value: classCounts.AMBER, color: "#B07A1E" },
+            { label: "RED", value: classCounts.RED, color: "#A23B2D" },
+            { label: "CRITICAL", value: classCounts.CRITICAL, color: "#7B1F22" },
+          ],
+          { title: "Visits by classification", max: Math.max(1, computed.length), suffix: "" }
+        )
+      : null;
+
+    const avgScore = computed.length ? Math.round((computed.reduce((s, c) => s + c.m.overall, 0) / computed.length) * 10) / 10 : "—";
+
+    const tracerRows = schema.tracers
+      .map((t) => {
+        const curVals = computed.map((c) => c.rec[t.field + "_current"]).filter((v) => v !== undefined && v !== null && v !== "");
+        const prevVals = computed.map((c) => c.rec[t.field + "_previous"]).filter((v) => v !== undefined && v !== null && v !== "");
+        if (!curVals.length) return null;
+        const avgCur = round1(curVals.reduce((a, b) => a + Number(b), 0) / curVals.length);
+        const avgPrev = prevVals.length ? round1(prevVals.reduce((a, b) => a + Number(b), 0) / prevVals.length) : null;
+        return "<tr><td>" + t.label + "</td><td>" + avgCur + (t.unit === "%" ? "%" : "") + "</td><td>" + (avgPrev === null ? "—" : avgPrev + (t.unit === "%" ? "%" : "")) + "</td></tr>";
+      })
+      .filter(Boolean)
+      .join("");
+
+    const facRows = buildFacilityRows(computed)
+      .sort((a, b) => a.score - b.score)
+      .map((r) => "<tr><td>" + r.label + "</td><td>" + r.lgaLabel + "</td><td>" + r.visits + "</td><td>" + r.score + "%</td><td>" + r.classification + "</td></tr>")
+      .join("");
+
+    const actions = collectActions(computed);
+    const overdue = actions.filter(isOverdue);
+    const actionRows = overdue
+      .map((a) => "<tr><td>" + (a.action_gap || "—") + "</td><td>" + ((lookups.facility[a.facility] || {}).label || a.facility) + "</td><td>" + fmtDate(a.due_date) + "</td></tr>")
+      .join("");
+
+    const html =
+      "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>" +
+      "<head><meta charset='utf-8'><title>Kwara ISS Report</title>" +
+      "<style>body{font-family:Calibri,Arial,sans-serif;color:#16241D;} h1{color:#16241D;font-size:22px;margin-bottom:2px;} h2{color:#294B39;font-size:16px;margin-top:26px;border-bottom:1px solid #C7BFA3;padding-bottom:4px;} " +
+      "p.meta{color:#5A6459;font-size:12px;margin-top:0;} table{border-collapse:collapse;width:100%;margin-top:8px;} td,th{border:1px solid #C7BFA3;padding:6px 8px;font-size:12px;text-align:left;} th{background:#E4ECE4;} img{margin-top:8px;}</style>" +
+      "</head><body>" +
+      "<h1>Kwara State Integrated Supportive Supervision</h1>" +
+      "<p class='meta'>Field monitoring report — " + scope + " &middot; generated " + genDate + " &middot; " + computed.length + " supervision visit" + (computed.length === 1 ? "" : "s") + " in scope</p>" +
+      "<h2>Summary</h2>" +
+      "<table><tr><th>Supervision visits</th><td>" + computed.length + "</td></tr>" +
+      "<tr><th>Average overall score</th><td>" + avgScore + (computed.length ? "%" : "") + "</td></tr>" +
+      "<tr><th>GREEN / AMBER / RED / CRITICAL</th><td>" + classCounts.GREEN + " / " + classCounts.AMBER + " / " + classCounts.RED + " / " + classCounts.CRITICAL + "</td></tr>" +
+      "<tr><th>Open corrective actions</th><td>" + actions.filter((a) => a.action_status !== "closed").length + " (" + overdue.length + " overdue)</td></tr></table>" +
+      "<h2>Thematic performance</h2>" +
+      (domainChart ? "<img src='" + domainChart + "' width='560'>" : "<p>No scored visits in scope.</p>") +
+      "<table><tr><th>Domain</th><th>Average score</th><th>Critical red flags</th></tr>" +
+      domainRows.map((r) => "<tr><td>" + r.label + "</td><td>" + r.avg + "%</td><td>" + r.flags + "</td></tr>").join("") +
+      "</table>" +
+      "<h2>Visit classification</h2>" +
+      (classChart ? "<img src='" + classChart + "' width='560'>" : "") +
+      "<h2>Tracer indicators</h2>" +
+      "<table><tr><th>Indicator</th><th>Current</th><th>Previous</th></tr>" + (tracerRows || "<tr><td colspan='3'>No recorded values in scope.</td></tr>") + "</table>" +
+      "<h2>Facility register (weakest first)</h2>" +
+      "<table><tr><th>Facility</th><th>LGA</th><th>Visits</th><th>Score</th><th>Classification</th></tr>" + (facRows || "<tr><td colspan='5'>No facilities in scope.</td></tr>") + "</table>" +
+      "<h2>Overdue corrective actions</h2>" +
+      "<table><tr><th>Gap</th><th>Facility</th><th>Due</th></tr>" + (actionRows || "<tr><td colspan='3'>None.</td></tr>") + "</table>" +
+      "</body></html>";
+
+    const blob = new Blob(["\ufeff", html], { type: "application/msword" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = exportFileNameBase() + ".doc";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
   }
 
   document.addEventListener("DOMContentLoaded", init);
