@@ -6,6 +6,7 @@
 <title>Kwara State ISS — Field Monitoring Dashboard</title>
 <meta name="description" content="Supervision coverage, thematic performance and data-quality monitoring for the Kwara State Integrated Supportive Supervision programme.">
 <link rel="stylesheet" href="assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
 <div class="app">
@@ -61,7 +62,7 @@
 
     <div class="side-source">
       Data source: KoboToolbox form
-      <a href="https://ee.kobotoolbox.org/XpP4DMwV" target="_blank" rel="noopener">open collection form ↗</a>
+      <a href="https://ee.kobotoolbox.org/1efqOgPJ" target="_blank" rel="noopener">open collection form ↗</a>
     </div>
   </aside>
 
@@ -74,14 +75,16 @@
         <p class="scope-line" id="scopeLine">Showing <b>all 16 LGAs</b> &middot; <b id="scopeCount">0</b> supervision visits</p>
       </div>
       <div class="topbar-right">
-        <div class="data-toggle" role="group" aria-label="Data source">
-          <button id="btnLive" class="is-on">Live data</button>
-          <button id="btnSample">Sample preview</button>
-        </div>
         <span class="updated-note" id="updatedNote">—</span>
-        <a class="btn" href="https://ee.kobotoolbox.org/XpP4DMwV" target="_blank" rel="noopener">Record a visit</a>
       </div>
     </div>
+
+    <nav class="section-nav" aria-label="Jump to section">
+      <a href="#section-thematic">Thematic performance</a>
+      <a href="#section-tracers">Tracer indicators</a>
+      <a href="#section-quality">Data quality &amp; corrective actions</a>
+      <a href="#section-register">Facility register</a>
+    </nav>
 
     <!-- Summary strip -->
     <section class="section">
@@ -89,7 +92,7 @@
     </section>
 
     <!-- Thematic domains -->
-    <section class="section">
+    <section class="section" id="section-thematic">
       <div class="section-head">
         <div>
           <h3>Thematic performance</h3>
@@ -102,7 +105,7 @@
     </section>
 
     <!-- Tracer indicators -->
-    <section class="section">
+    <section class="section" id="section-tracers">
       <div class="section-head">
         <div>
           <h3>Tracer indicators</h3>
@@ -115,7 +118,7 @@
     </section>
 
     <!-- Data quality + Action tracker -->
-    <section class="section">
+    <section class="section" id="section-quality">
       <div class="section-head">
         <div>
           <h3>Data quality &amp; corrective actions</h3>
@@ -138,13 +141,14 @@
     </section>
 
     <!-- Facility register -->
-    <section class="section">
+    <section class="section" id="section-register">
       <div class="section-head">
         <div>
           <h3>Facility register</h3>
           <p>Every supervised facility in the current scope, ranked by most recent classification.</p>
         </div>
       </div>
+      <input type="text" class="register-search" id="registerSearch" placeholder="Search facility name…">
       <div class="register-wrap">
         <table class="register" id="registerTable">
           <thead>
@@ -163,9 +167,22 @@
       </div>
     </section>
 
+    <!-- Export -->
+    <section class="section" id="section-export">
+      <div class="section-head">
+        <div>
+          <h3>Export</h3>
+          <p>Downloads reflect the current location and filter selection above.</p>
+        </div>
+      </div>
+      <div class="export-row">
+        <button class="btn" id="btnExportExcel">Download raw submissions (Excel)</button>
+        <button class="btn ghost" id="btnExportWord">Download report (Word)</button>
+      </div>
+    </section>
+
     <footer class="site-footer">
-      <span>Kwara State Ministry of Health &amp; Human Services — Integrated Supportive Supervision</span>
-      <span>Built on <a href="https://kf.kobotoolbox.org/api/v2/assets/a3px58eSfDuyg3PLUdNBpR/" target="_blank" rel="noopener">KoboToolbox</a> &middot; form ID a3px58eSfDuyg3PLUdNBpR</span>
+      <span>Kwara State Primary Health Care Development Agency Integrated Supportive Supervision</span>
     </footer>
 
   </main>
