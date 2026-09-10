@@ -1116,12 +1116,14 @@
       return;
     }
     const { schema, lookups } = state;
-    const qFields = schema.domains.flatMap((d) => d.items.map((it) => it.name));
+    const qItems = schema.domains.flatMap((d) => d.items);
+    const qFields = qItems.map((it) => it.name);
+    const qHeaders = qItems.map((it) => it.label);
     const tracerFields = schema.tracers.flatMap((t) => [t.field + "_current", t.field + "_previous"]);
     const header = [
       "visit_id", "date", "lga", "ward", "facility", "facility_type", "visit_type",
       "supervisor_name", "supervisor_level", "overall_score", "classification", "critical_red_flags",
-    ].concat(qFields, tracerFields, ["report_completeness_current", "report_completeness_previous", "report_timeliness_current", "report_timeliness_previous"]);
+    ].concat(qHeaders, tracerFields, ["report_completeness_current", "report_completeness_previous", "report_timeliness_current", "report_timeliness_previous"]);
 
     const rows = bundle.computed.map((c) => {
       const r = c.rec;
